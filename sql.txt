@@ -1,0 +1,7 @@
+CREATE TABLE `carpool`.`user` ( `id` INT NOT NULL AUTO_INCREMENT , `f_name` VARCHAR(20) NOT NULL , `m_name` VARCHAR(20) NOT NULL , `surname` VARCHAR(20) NOT NULL , `dob` VARCHAR(10) NOT NULL , `house_no` VARCHAR(10) NOT NULL , `address l1` VARCHAR(20) NOT NULL , `address l2` VARCHAR(20) NOT NULL , `landmark` VARCHAR(50) NOT NULL , `pincode` INT(6) NOT NULL , `country` VARCHAR(20) NOT NULL , `mail_id` VARCHAR(25) NOT NULL , `phone` INT(10) NOT NULL , `blood_group` VARCHAR(2) NOT NULL , `identification` TEXT NOT NULL , `department` VARCHAR(50) NOT NULL , `auth_level` INT NOT NULL , PRIMARY KEY (`id`), UNIQUE (`mail_id`)) ENGINE = InnoDB;
+
+CREATE TABLE `carpool`.`applicatioin` ( `id` VARCHAR(20) NOT NULL , `draft_id` VARCHAR(20) NOT NULL , `applicant` INT NOT NULL , `receiver` INT NOT NULL , `message` TEXT NOT NULL , `application_date` VARCHAR(10) NOT NULL , `department` VARCHAR(50) NOT NULL , `req_date` VARCHAR(10) NOT NULL , `ending_date` VARCHAR(10) NOT NULL , `vehicle_req` VARCHAR(50) NOT NULL , `vechile_issue` VARCHAR(20) NOT NULL , `notification` VARCHAR(1) NOT NULL , `issued_by` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`draft_id`)) ENGINE = InnoDB;
+
+
+CREATE TABLE `carpool`.`vechile` ( `v_no` VARCHAR(20) NOT NULL , `v_type` VARCHAR(20) NOT NULL , `subtype` VARCHAR(20) NOT NULL , `status` VARCHAR(10) NOT NULL , `location` VARCHAR(30) NOT NULL , `app_id` VARCHAR(20) NOT NULL , PRIMARY KEY (`v_no`)) ENGINE = InnoDB;
+
