@@ -1,6 +1,5 @@
 <?php 
 	include 'core/core.inc.php';
-	print_r($_SESSION);
 	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");  }
 ?>
 <!DOCTYPE html>
@@ -26,86 +25,80 @@
 	<meta property="og:image:height" content="128">
 
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/register.css">
-
+    <style type="text/css">
+		.loginform{
+			margin: 10%;
+		}
+		@media (min-width: 768px) { 
+			.loginform{
+				margin-top: 100px;
+			}
+		}
+	</style>
 </head>
-<body>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				
-
-
-				</div>
-			<div class="col">
-				<form action="action_page.php">
-					  <div class="imgcontainer">
-    <img src="images\tata.jpg" width="192px" alt="tata" class="tata">
-  </div>
-
-  <div class="container">
-  	<label for="uname"><b>Name</b></label>
-    <input type="text" placeholder=" " name="Name" required>
-
- 
-    <label for="phn"><b>Phone</b></label>
-    <input type="text" placeholder=" " name="Phone" required>
-
-
-    <label for="mail"><b>Emailid</b></label>
-    <input type="text" placeholder=" " name="mailid" required>
-
-    <label for="npsw"><b>New Password</b></label>
-    <input type="text" placeholder=" " name="npsw" required>
-
-    <label for="cpsw"><b>Confirm Password</b></label>
-    <input type="text" placeholder=" " name="cpsw" required>
-
-
-    <label for="adrs"><b>Address</b></label>
-    <input type="text" placeholder=" " name="adrs" required>
-
-
-    <label for="pin"><b>Pincode</b></label>
-    <input type="text" placeholder=" " name="pin" required>
-
-
-    <label for="state"><b>State</b></label>
-    <input type="text" placeholder=" " name="state" required>
-
-
-    <label for="cntry"><b>Country</b></label>
-    <input type="text" placeholder=" " name="cntry" required>
-
-
-    <label for="bg"><b>Blood Group</b></label>
-    <input type="text" placeholder=" " name="bg" required>
-     </div>
-
-    <div class="container" style="background-color:#B4FFC0">
-    <span class="psw"><a href="#">login</a></span>
-       
-
-  <div class="container" style="background-color:#B4FFC0">
-    <button type="button" class="registerbtn">Register</button>
-
-    
-  </div>
-</form>
-
-
-
-
-
-
-
+<body style="background-image: linear-gradient(-45deg, #6078EA, #17EAD9);">
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col col-lg-4">
+				<div class="loginform">
+					<div style="background: #B4FFC0; box-shadow: 0px 0 10px 0px #007bff;">
+						<div style="background: #11FFB6; text-align: center;vertical-align: middle; min-height: 150px;">
+							<br/>
+							<br/>
+							<img src="images/tata_composit_logo.png" width="70%">
+							<br/>
+							<br/>
+							<br/>
+						</div>
+						<div style="padding: 20px;">
+							<form>
+								<div class="form-group"s>
+									<label for="uname">Name</label>
+									<input type="text" class="form-control" id="exampleInputName" placeholder="Enter Name">
+								</div>
+                     			<div class="form-group"s>
+									<label for="exampleInputEmail1">Email address</label>
+									<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputNPassword">New Password</label>
+									<input type="password" class="form-control" id="exampleInputNPassword1" placeholder="New Password">
+									<!-- <small id="emailHelp" class="form-text text-muted">Don't share your password to anyone else</small> -->
+								</div>
+								<div class="form-group"s>
+									<label for="exampleInputPassword">Confirm Password</label>
+									<input type="password" class="form-control" id="exampleInputCPassword"placeholder="Confirm Password">
+								</div>
+								<div class="form-group"s>
+									<label for="exampleInputAddress">Address</label>
+									<input type="text" class="form-control" id="exampleInputAddress" placeholder="Enter address">
+								</div>
+								<div class="form-group"s>
+									<label for="exampleInputPinCode">PinCode</label>
+									<input type="number" class="form-control" id="exampleInputPinCode" placeholder="Enter PinCode">
+								</div>
+								<div class="form-group"s>
+									<label for="state">State</label>
+									<input type="text" class="form-control" id="exampleInputState" placeholder="Enter State">
+								</div>
+								<div class="form-group"s>
+									<label for="country">Country</label>
+									<input type="text" class="form-control" id="exampleInputCountry" placeholder="Enter Country">
+								</div>
+								<div class="form-group"s>
+									<label for="bgroup">Blood Group</label>
+									<input type="text" class="form-control" id="exampleInputBloodGroup" placeholder="Enter Blood Group">
+								</div>
+								
+								<div style="float: right;">
+									<button type="submit" class="btn btn-primary">Register</button>
+								</div>
+								<small><a href="">Login</a></small>
+							</form>
+							<br>
+						</div>
 					</div>
-			<div class="col">
-				
-
+				</div>
 			</div>
 		</div>
 	</div>
-</body>
-<script type="text/javascript" src=""bootstrap/js/bootstrap.min.js""></script>
-</html>

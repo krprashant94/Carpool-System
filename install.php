@@ -189,7 +189,6 @@
 		$.ajax({
 			url: "ajax/test_connection.php?host=" + host + "&db=" + db + "&user=" + user + "&pass=" + pass,
 			success: function(result){
-				console.log(result);
 				if(result == 'true'){
 					$('.conn').removeClass('list-group-item-danger');
 					$('.conn').addClass('list-group-item-success');
@@ -197,10 +196,19 @@
 					valid_host = true;
 					valid_password =true;
 					valid_username =true;
+					swal({
+						title: "Connection established",
+						icon: "success",
+					});
+
 				}else{
 					$('.conn').removeClass('list-group-item-success');
 					$('.conn').addClass('list-group-item-danger');
 					valid_conn = false;
+					swal({
+						title: "Connection Failed",
+						icon: "error",
+					});
 				}
 			},
 			error: function(arg) {
@@ -213,6 +221,7 @@
 	});
 	
 	$("#install").click(function (arg) {
+		$("#install").attr("disabled", "disabled");
 		email = $("#ipemail").val();
 		pass = $("#ippassword").val();
 		host = $("#iphostname").val();
@@ -245,13 +254,14 @@
 					title: message,
 					icon: "error",
 				});
+				$("#install").removeAttr("disabled");
 			}else{
 				$.ajax({
 					url: "ajax/install.php?email="+email+"&pass="+ pass +"&host="+ host +"&path="+ path +"&db="+ db +"&user="+ user +"&db_pass="+db_pass,
 					success: function(result){
 						if(result == 'true'){
 							swal({
-								title: "",
+								title: "Installation Completed",
 								icon: "success",
 							});
 						}else{
@@ -259,14 +269,17 @@
 								title: "One or more then one error occured",
 								icon: "error",
 							});
+							$("#install").removeAttr("disabled");
+
 						}
+						location.assign("index.php");
 					},
 					error: function(arg) {
 						swal({
 							title: "Setup file corrupted",
 							icon: "error",
 						});
-
+						$("#install").removeAttr("disabled");
 					}
 				});
 
@@ -276,6 +289,7 @@
 				title: "Make sure to click the checkbox",
 				icon: "error",
 			});
+			$("#install").removeAttr("disabled");
 		}
 	});
 </script>

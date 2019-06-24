@@ -1,6 +1,6 @@
 <?php
 		$email = "kr.prashant94@gmail.com";
-		$pass = "abcdef";
+		$pass = "asdfgh";
 		$host = "localhost";
 		$path = "/";
 		$db = "carpool";

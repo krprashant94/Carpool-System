@@ -1,0 +1,173 @@
+/*@import url(https://fonts.googleapis.com/css?family=Open+Sans);*/
+
+/** { font-family: "open sans", "Arial"; font-size: 12px; margin: 0; padding: 0; outline: 0; text-decoration: none; box-sizing: border-box !important; -webkit-box-sizing: border-box !important; -moz-box-sizing: border-box !important; -ms-box-sizing: border-box !important; }*/
+
+	#calendar
+	{
+		display: block;
+		width: 210px;
+		overflow: hidden;
+
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
+
+		#calendar .c-title
+		{
+			position: relative;
+			width: 100%;
+			color: #ffffff;
+			background-color: #eb556e;
+			border: 1px solid #b74054;
+
+			-webkit-border-top-left-radius: 2px;
+			-webkit-border-top-right-radius: 2px;
+			-moz-border-radius-topleft: 2px;
+			-moz-border-radius-topright: 2px;
+			border-top-left-radius: 2px;
+			border-top-right-radius: 2px;
+		}
+		#calendar .c-title .left-button
+		{
+			cursor: pointer;
+			position: absolute;
+			left: 0px;
+			width: 32px;
+			text-align: center;
+			color: inherit;
+			padding: 12px 0 12px 0;
+		}
+		#calendar .c-title .title
+		{
+			margin: 0 auto;
+			margin-left: 32px;
+			margin-right: 32px;
+			text-align: center;
+			color: inherit;
+			padding: 12px 0 12px 0;
+		}
+		#calendar .c-title .right-button
+		{
+			cursor: pointer;
+			position: absolute;
+			right: 0px;
+			width: 32px;
+			text-align: center;
+			color: inherit;
+			padding: 12px 0 12px 0;
+		}
+
+			#calendar .left-button:hover, #calendar .right-button:hover
+			{
+				background: #e94e68;
+			}
+			#calendar .left-button:active, #calendar .right-button:active
+			{
+				background: #e5526a;
+			}
+
+		#calendar .c-days
+		{
+			width: 100%;
+			border-spacing: 0px;
+			border-collapse: separate;
+
+			border: 1px solid #c3c3c3;
+			border-top: none;
+			background: url(https://i.imgur.com/wlDJMEM.png) top center repeat-x;
+		}
+		#calendar .c-days thead th
+		{
+			padding: 12px 0 12px 0;
+			width: 14.28%;
+			text-align: center;
+			font-size: 10px;
+			font-weight: normal;
+			color: #eb556e;
+			text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+		}
+		#calendar .c-days tbody tr td
+		{
+			border-width: 1px 1px 0px 0px;
+			border-style: solid;
+			border-color: rgba(120, 120, 120, 0.05);
+		}
+		#calendar .c-days tbody tr td:last-child
+		{
+			border-width: 1px 0px 0px 0px;
+			border-style: solid;
+			border-color: rgba(120, 120, 120, 0.05);
+		}
+		#calendar .c-days tbody tr:last-child td
+		{
+			border-bottom: none;
+		}
+		#calendar .c-days tbody tr td > span
+		{
+			display: block;
+			width: 100%;
+			padding: 6px 0 6px 0;
+			text-align: center;
+			text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.4);
+			color: #6c7174;
+			font-size: 11px;
+
+			border-top: 1px solid rgba(255, 255, 255, 0.05);
+			border-left: 1px solid rgba(255, 255, 255, 0.05);
+		}
+		#calendar .c-days tbody tr td.other-month > span
+		{
+			color: #ced0d1;
+
+			border-top: 1px solid rgba(255, 255, 255, 0.05);
+			border-left: 1px solid rgba(255, 255, 255, 0.05);
+		}
+
+		#calendar .c-days tbody tr td.today > span
+		{
+			padding: 7px 0 1px 0;
+			border: none;
+			border-bottom: 5px solid #eb556e;
+			margin-bottom: 1px;
+			color: #000 !important;
+
+			cursor: default;
+		}
+
+		#calendar .c-days tbody tr td.sunday > span
+		{
+			padding: 7px 0 1px 0;
+			color: #eb556e;
+		}
+
+		#calendar .c-days tbody tr td.mark > span
+		{
+			padding: 7px 0 1px 0;
+			border: none;
+			border-bottom: 5px solid #6fd88d;
+			margin-bottom: 1px;
+		}
+
+		#calendar .c-days tbody tr td.mark-blue > span
+		{
+			padding: 7px 0 1px 0;
+			border: none;
+			border-bottom: 5px solid #55bbeb;
+			margin-bottom: 1px;
+		}
+
+		#calendar .c-days tbody tr td:hover
+		{
+			background-color: #f0f0f0;
+			cursor: pointer;
+		}
+
+	ul#calendar { display: table; padding-right: 20px; margin: 20px auto; list-style: none; }
+	ul#calendar:last-child { padding-right: 0; }
+	ul#calendar li { float: left; margin-right: 12px; }
+	ul#calendar li:last-child { margin-right: 0; }
+
+	div#text { text-align: center; font-size: 48px; width: 610px; margin: 0 auto; margin-top: 50px; margin-top: 80px; }
+	div#smalltext { text-align: center; font-size: 15px; width: 600px; margin: 0 auto; }
+	div#content { display: table; margin: 0 auto; padding: 30px; }
