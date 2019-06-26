@@ -25,38 +25,55 @@
 		}
 		public function insert($applicant, $receiver){
 			try{
-				$draft = $this->random().(time()-1561404886);
+				$draft = $this->random().(time()-1561567370);
 				$q = $this->conn->prepare("INSERT INTO applicatioin (draft_id, applicant, receiver) VALUES (?, ?, ?);");
 				$q->execute(array($draft, $applicant, $receiver));
-				if($q->rowCount() == 1){ return true; }
+				if($q->rowCount() == 1){ return $draft; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				echo $e->getMessage();
 			}
 		}
 		public function delete($applicant){
 			try{
-				$q = $this->conn->prepare("DELETE FROM applicatioin WHERE applicatioin.id = ?;");
+				$q = $this->conn->prepare("DELETE FROM applicatioin WHERE applicatioin.draft_id = ?;");
 				$q->execute(array($applicant));
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				echo $e->getMessage();
 			}
 		}
 		public function update($column, $new_val, $primery){
 			try{
-				$q = $this->conn->prepare("UPDATE applicatioin SET ".$column." = ? WHERE applicatioin.id = ?;");
+				$q = $this->conn->prepare("UPDATE applicatioin SET ".$column." = ? WHERE applicatioin.draft_id = ?;");
 				$q->execute(array($new_val, $primery));
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				echo $e->getMessage();
 			}
+		}
+
+		function fetch_by_id($where, $id){
+			$query="SELECT * FROM applicatioin WHERE (".$where."=?)";
+			$result = $this->conn->prepare($query);
+			$result->execute(array($id));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+
+		function fetch_by_two_id($where1, $id1, $where2, $id2){
+			$query="SELECT * FROM applicatioin WHERE (".$where1."=?) AND (".$where2."=?) ";  
+			$result = $this->conn->prepare($query);
+			$result->execute(array($id1, $id2));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+			
 		}
 	}
 
-	$a = new Application($host, $db_name, $db_user, $db_pass);
-	$a->insert("1", "3");
-	$a->delete('3');
-	$a->update("req_date", "3", "8");
+	// $a = new Application($host, $db_name, $db_user, $db_pass);
+	// $a->insert("1", "3");
+	// $a->delete('3');
+	// $a->update("req_date", "3", "8");

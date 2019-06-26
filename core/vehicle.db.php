@@ -54,9 +54,26 @@
 				echo "Error";
 			}
 		}
+
+		function fetch_by_id($where, $id){
+			$query="SELECT * FROM vehicle WHERE (".$where."=?)";
+			$result = $this->conn->prepare($query);
+			$result->execute(array($id));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+
+		function fetch_by_two_id($where1, $id1, $where2, $id2){
+			$query="SELECT * FROM vehicle WHERE (".$where1."=?) AND (".$where2."=?) ";  
+			$result = $this->conn->prepare($query);
+			$result->execute(array($id1, $id2));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+			
+		}
 	}
 
-	$a = new Vehicle($host, $db_name, $db_user, $db_pass);
-	$a->insert("1", "3");
-	$a->delete('3');
-	$a->update("req_date", "3", "8");
+	// $a = new Vehicle($host, $db_name, $db_user, $db_pass);
+	// $a->insert("1", "3");
+	// $a->delete('3');
+	// $a->update("req_date", "3", "8");

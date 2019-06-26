@@ -11,11 +11,11 @@
 			$details1 = $u->fetch_by_two_id("mail_id", $_POST['user'], "password", sha1($_POST['pass']));
 			$details2 = $u->fetch_by_two_id("phone", $_POST['user'], "password", sha1($_POST['pass']));
 
-			if(count($details1)){
-				$_SESSION['user_id'] = $details1[0];
+			if(count($details1) == 1){
+				$_SESSION['user_id'] = $details1[0]['id'];
 				header("Location: index.php");
-			}else if(count($details2)){
-				$_SESSION['user_id'] = $details2[0];
+			}else if(count($details2) == 1){
+				$_SESSION['user_id'] = $details2[0]['id'];
 				header("Location: index.php");
 			}else{
 				$login_message = "Invalid login information";
