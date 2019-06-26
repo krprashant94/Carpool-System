@@ -1,32 +1,63 @@
 <?php 
 	include 'core/core.inc.php';
-	print_r($_SESSION);
 	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");  }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Forgot Password</title>
-	<meta name="keyword" content="tata sponge, carpool, car, car application"/>
-	<meta name="description" property="og:description" content="Book yor car instantly with TATA steel carpool network."/>
-	<meta name="abstract" content="Car pool network of TATA sponge limited"/>
-	<meta name="copyright"content="TATA Sponge Ltd.">
-	<meta name="language" content="en">
-	<meta name="robots" content="index, follow">
-
-	<!-- <meta name="og:url" property="og:url" content="https://www.websitename.com"/> -->
 	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: Forgot Password"/>
-	<meta property="og:site_name" content="Car pool network">
-
-	<link rel="shortcut icon" href="favicon.ico" />
-
-	<meta name="og:image" property="og:image" content="[poster-url]">
-	<meta property="og:image:type" content="image/jpg">
-	<meta property="og:image:width" content="128">
-	<meta property="og:image:height" content="128">
-
+	<?php
+		include 'core/meta.php';
+	?>
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
-
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col col-lg-4">
+				<div class="loginform">
+					<div class="innerbox">
+						<div class="toplogo">
+							<br/>
+							<br/>
+							<img src="images/tata_composit_logo.png" width="70%">
+							<br/>
+							<br/>
+							<br/>
+						</div>
+						<div class="formbox">
+							<form method="POST">
+								<div class="form-group"s>
+									<label for="exampleInputemailid">Email-ID</label>
+									<input type="email" name="mailid" class="form-control" id="exampleInputEmailid" placeholder="example@domain.com">
+								</div>
+								<center><b>OR</b></center>
+								<div class="form-group">
+									<label for="exampleInputphone">Phone Number</label>
+									<input type="number" name="phone" class="form-control" id="exampleInputphone" placeholder="1234567890">
+								</div>
+								<br/>
+								<input type="button" class="btn btn-primary" onclick="swal('Operation Unavailable')" value="Reset">
+								<br/><br/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/swal.js"></script>
+<script type="text/javascript">
+	$('.loginform').hide();
+	$('.loginform').fadeIn(1000);
+
+$("#motimaa").click(function(){
+	
+});
+
+</script>
 </html>

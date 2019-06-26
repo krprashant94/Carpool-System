@@ -1,0 +1,20 @@
+a:hover{
+	text-decoration:none;
+}
+.list-group-item{
+	background-color: #AFAFAF;
+	border:0px;
+	cursor: pointer;
+	color: white;
+}
+.list-group-item:hover{
+	background-color: #5ABDFF;
+}
+.active_side_nav{
+	background-color: #5ABDFF;
+}
+.side_nev{
+	background: #AFAFAF;
+	min-height: 91.5vh;
+	padding: 0px;
+}

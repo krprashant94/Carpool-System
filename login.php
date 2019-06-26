@@ -1,30 +1,38 @@
 <?php 
 	include 'core/core.inc.php';
 	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");	}
+
+	$login_message = false;
+	if (isset($_POST['user']) && isset($_POST['pass'])) {
+		if (!empty($_POST['user']) && !empty($_POST['pass'])) {
+			require 'core/user.db.php';
+			$u = new User($host, $db_name, $db_user, $db_pass);
+
+			$details1 = $u->fetch_by_two_id("mail_id", $_POST['user'], "password", sha1($_POST['pass']));
+			$details2 = $u->fetch_by_two_id("phone", $_POST['user'], "password", sha1($_POST['pass']));
+
+			if(count($details1)){
+				$_SESSION['user_id'] = $details1[0];
+				header("Location: index.php");
+			}else if(count($details2)){
+				$_SESSION['user_id'] = $details2[0];
+				header("Location: index.php");
+			}else{
+				$login_message = "Invalid login information";
+			}
+		}else{
+			$login_message = "Email or Phone number or password is empty ";
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Login</title>
-	<meta name="keyword" content="tata sponge, carpool, car, car application"/>
-	<meta name="description" property="og:description" content="Book yor car instantly with TATA steel carpool network."/>
-	<meta name="abstract" content="Car pool network of TATA sponge limited"/>
-	<meta name="copyright"content="TATA Sponge Ltd.">
-	<meta name="language" content="en">
-	<meta name="robots" content="index, follow">
-
-	<meta name="og:url" property="og:url" content="<?php echo $_SERVER['HTTP_HOST']; ?>"/>
 	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: Login"/>
-	<meta property="og:site_name" content="Car pool network">
-
-	<link rel="shortcut icon" href="favicon.ico" />
-
-	<meta name="og:image" property="og:image" content="[poster-url]">
-	<meta property="og:image:type" content="image/jpg">
-	<meta property="og:image:width" content="128">
-	<meta property="og:image:height" content="128">
-
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+	<?php
+		include 'core/meta.php';
+	?>
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
@@ -44,8 +52,8 @@
 						<div class="formbox">
 							<form method="POST">
 								<div class="form-group"s>
-									<label for="exampleInputEmail1">Email address</label>
-									<input type="email" name="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+									<label for="exampleInputEmail1">Email or Phone</label>
+									<input type="text" name="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">Password</label>
@@ -56,7 +64,7 @@
 							</form>
 							<br>
 							<div class="foottext">
-								<small><a href="">Register</a> | <a href="">Forgot Password</a></small>
+								<small><a href="register.php">Register</a> | <a href="forgot_pass.php">Forgot Password</a></small>
 							</div>
 						</div>
 					</div>
@@ -64,58 +72,17 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-	<div class="container">
-		<div class="container" >
-		<div class="row">
-			<div class="col-1">
-				
-			</div>
-			<div class="col-2">
-			<form>
-	<div class="form-group">
-		<label for="exampleInputEmail1">Phone/Email address</label>
-		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-		<small id="emailHelp" class="form-text text-muted"></small>
-	</div>
-	<div class="form-group">
-		<label for="exampleInputPassword1">Password</label>
-		<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-	</
-	</div>
-</form>
-		<center> <button type="button" class="btn btn-primary center">Login</button><center>
-		<bottom-left><button type="button" class="btn btn-primary center">Register</button><bottom-left>
-			<a class="btn btn-link" href="#" role="button">Forgot Password?</a>
-</form>
-			</div>
-			<div class="col-3">
-				
-
-			</div>
-		</div>
-	</div> -->
 </body>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/swal.js"></script>
+<script type="text/javascript">
+	$('.loginform').hide();
+	$('.loginform').fadeIn(1000);
+	<?php
+		if ($login_message) {
+			echo 'swal({title:"'.$login_message.'",icon: "error"});';
+		}
+	?>
+</script>
 </html>

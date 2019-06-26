@@ -1,48 +1,55 @@
 <?php 
 	include 'core/core.inc.php';
 	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");  }
+	$reg_message = false;
+	print_r($_POST);
+	if (isset($_POST['register'])) {
+		if(empty($_POST['name'])){
+			$reg_message = "Your name is empty";
+		}elseif (empty($_POST['email'])) {
+			$reg_message = "Email ID is empty";
+		}elseif (empty($_POST['phone'])) {
+			$reg_message = "Phone number is empty";
+		}elseif ($_POST['department'] == "Choose...") {
+			$reg_message = "Department is empty is empty";
+		}elseif (empty($_POST['new_password'])) {
+			$reg_message = "Password is empty";
+		}elseif (empty($_POST['confirm_password'])) {
+			$reg_message = "Confirmation Password is empty";
+		}elseif ($_POST['confirm_password'] != $_POST['new_password']) {
+			$reg_message = "Password and confirmation Password not same";
+		}elseif (empty($_POST['city'])) {
+			$reg_message = "Residental city or village is empty";
+		}elseif (empty($_POST['pin_code'])) {
+			$reg_message = "Your area pin code is empty";
+		}elseif ($_POST['blood_group'] == "Choose...") {
+			$reg_message = "Blood Group is not valid";
+		}else{
+			require 'core/user.db.php';
+			$u = new User($host, $db_name, $db_user, $db_pass);
+			$u->insert($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['department'], $_POST['new_password'], $_POST['city'], $_POST['pin_code'], $_POST['blood_group']);
+
+
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Register</title>
-	<meta name="keyword" content="tata sponge, carpool, car, car application"/>
-	<meta name="description" property="og:description" content="Book yor car instantly with TATA steel carpool network."/>
-	<meta name="abstract" content="Car pool network of TATA sponge limited"/>
-	<meta name="copyright"content="TATA Sponge Ltd.">
-	<meta name="language" content="en">
-	<meta name="robots" content="index, follow">
-
-	<!-- <meta name="og:url" property="og:url" content="https://www.websitename.com"/> -->
 	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: Register"/>
-	<meta property="og:site_name" content="Car pool network">
-
-	<link rel="shortcut icon" href="favicon.ico" />
-
-	<meta name="og:image" property="og:image" content="[poster-url]">
-	<meta property="og:image:type" content="image/jpg">
-	<meta property="og:image:width" content="128">
-	<meta property="og:image:height" content="128">
-
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
-    <style type="text/css">
-		.loginform{
-			margin: 10%;
-		}
-		@media (min-width: 768px) { 
-			.loginform{
-				margin-top: 100px;
-			}
-		}
-	</style>
+	<?php
+		include 'core/meta.php';
+	?>
+	<link rel="stylesheet" href="css/login.css">
 </head>
-<body style="background-image: linear-gradient(-45deg, #6078EA, #17EAD9);">
+<body style="height: auto;">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col col-lg-4">
 				<div class="loginform">
-					<div style="background: #B4FFC0; box-shadow: 0px 0 10px 0px #007bff;">
-						<div style="background: #11FFB6; text-align: center;vertical-align: middle; min-height: 150px;">
+					<div class="innerbox">
+						<div class="toplogo">
 							<br/>
 							<br/>
 							<img src="images/tata_composit_logo.png" width="70%">
@@ -50,55 +57,91 @@
 							<br/>
 							<br/>
 						</div>
-						<div style="padding: 20px;">
-							<form>
-								<div class="form-group"s>
+						<div class="formbox">
+							<form method="POST">
+								<div class="form-group">
 									<label for="uname">Name</label>
-									<input type="text" class="form-control" id="exampleInputName" placeholder="Enter Name">
+									<input type="text" class="form-control" name="name" <?php if (!empty($_POST['name'])) {echo 'value="'.$_POST['name'].'"';} ?> id="exampleInputName" placeholder="Enter Name">
 								</div>
-                     			<div class="form-group"s>
+                     			<div class="form-group">
 									<label for="exampleInputEmail1">Email address</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+									<input type="email" class="form-control" name="email" <?php if (!empty($_POST['email'])) {echo 'value="'.$_POST['email'].'"';} ?> id="exampleInputEmail1" placeholder="Email ID">
+								</div>
+                     			<div class="form-group">
+									<label for="exampleInputEmail1">Phone Number</label>
+									<input type="number" class="form-control" name="phone" <?php if (!empty($_POST['phone'])) {echo 'value="'.$_POST['phone'].'"';} ?> id="exampleInputEmail1" placeholder="Phone Number">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputNPassword">New Password</label>
-									<input type="password" class="form-control" id="exampleInputNPassword1" placeholder="New Password">
-									<!-- <small id="emailHelp" class="form-text text-muted">Don't share your password to anyone else</small> -->
+									<label for="bgroup">Department</label>
+		     						<select id="inputState" class="form-control" name="department">
+		     							<?php
+		     								if (!empty($_POST['department'])) {echo '<option selected>'.$_POST['department'].'</option>';}
+		     								else{echo "<option selected>Choose...</option>";}
+		     							?>
+			        					<option>Information Technology</option>
+			        					<option>Accounts</option>
+			        					<option>Management</option>
+			        					<option>Enviroment</option>
+			        					<option>Other</option>
+		      						</select>
 								</div>
-								<div class="form-group"s>
+								<div class="form-group">
+									<label for="exampleInputNPassword">Password</label>
+									<input type="password" class="form-control" name="new_password" <?php if (!empty($_POST['new_password'])) {echo 'value="'.$_POST['new_password'].'"';} ?> id="exampleInputNPassword1" placeholder="Password">
+								</div>
+								<div class="form-group">
 									<label for="exampleInputPassword">Confirm Password</label>
-									<input type="password" class="form-control" id="exampleInputCPassword"placeholder="Confirm Password">
+									<input type="password" class="form-control" name="confirm_password" id="exampleInputCPassword" placeholder="Confirm Password">
 								</div>
-								<div class="form-group"s>
-									<label for="exampleInputAddress">Address</label>
-									<input type="text" class="form-control" id="exampleInputAddress" placeholder="Enter address">
+								<div class="form-group">
+									<label for="exampleInputAddress">City</label>
+									<input type="text" class="form-control" name="city" <?php if (!empty($_POST['city'])) {echo 'value="'.$_POST['city'].'"';} ?> id="exampleInputAddress" placeholder="Address">
 								</div>
-								<div class="form-group"s>
-									<label for="exampleInputPinCode">PinCode</label>
-									<input type="number" class="form-control" id="exampleInputPinCode" placeholder="Enter PinCode">
+								<div class="form-group">
+									<label for="exampleInputPinCode">Pin Code</label>
+									<input type="number" class="form-control" name="pin_code" <?php if (!empty($_POST['pin_code'])) {echo 'value="'.$_POST['pin_code'].'"';} ?> id="exampleInputPinCode" placeholder="Pin Code">
 								</div>
-								<div class="form-group"s>
-									<label for="state">State</label>
-									<input type="text" class="form-control" id="exampleInputState" placeholder="Enter State">
-								</div>
-								<div class="form-group"s>
-									<label for="country">Country</label>
-									<input type="text" class="form-control" id="exampleInputCountry" placeholder="Enter Country">
-								</div>
-								<div class="form-group"s>
+								<div class="form-group">
 									<label for="bgroup">Blood Group</label>
-									<input type="text" class="form-control" id="exampleInputBloodGroup" placeholder="Enter Blood Group">
+		     						<select id="inputState" class="form-control" name="blood_group">
+		     							<?php
+		     								if (!empty($_POST['blood_group'])) {echo '<option selected>'.$_POST['blood_group'].'</option>';}
+		     								else{echo "<option selected>Choose...</option>";}
+		     							?>
+			        					<option>O+</option>
+			        					<option>A+</option>
+			        					<option>A-</option>
+			        					<option>B+</option>
+			        					<option>B-</option>
+			        					<option>AB+</option>
+			        					<option>AB-</option>
+			        					<option>O-</option>
+		      						</select>
 								</div>
 								
+								<a href="login.php" class="btn btn-link">Login</a>
 								<div style="float: right;">
-									<button type="submit" class="btn btn-primary">Register</button>
+									<button type="submit" class="btn btn-primary" name="register">Register</button>
 								</div>
-								<small><a href="">Login</a></small>
 							</form>
 							<br>
 						</div>
 					</div>
-				</div>
+				</div>s
 			</div>
 		</div>
 	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/swal.js"></script>
+<script type="text/javascript">
+	$('.loginform').animate({opacity:0},0);
+	$('.loginform').animate({opacity:1},1000);
+	<?php
+		if ($reg_message) {
+			echo 'swal({title:"'.$reg_message.'",icon: "error"});';
+		}
+	?>
+</script>
+</html>

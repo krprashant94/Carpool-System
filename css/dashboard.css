@@ -1,0 +1,22 @@
+.poolcard{
+	box-shadow: 0 0 10px 0 #5ABDFF;
+	border: 1px solid #17EAD9;
+}
+@media (max-width: 992px) { 
+	.poolcard{
+		margin: 20px;
+	}
+}
+
+.checkbox_column{
+	background: #EBFCFF;
+	border:1px solid #5ABDFF;
+	border-collapse: unset;
+}
+.checkbox_column td{
+	border:1px solid #5ABDFF;
+	background: #FFFFFF;
+	width: 20px;
+	height: 20px;
+	margin: 10px;
+}

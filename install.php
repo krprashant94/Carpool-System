@@ -6,12 +6,16 @@
 
 </head>
 <body>
+
+<nav class="navbar navbar-dark bg-info" style="background-image: linear-gradient(-45deg, #6078EA, #17EAD9);">
+	<img src="images/tata_composit_logo.png">
+ 	<!-- <a class="navbar-brand" href="#">TATA Sponge</a> -->
+	<span style="color: white;">Experss Install</span>
+</nav>
+	<br>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
-				<div style="padding: 10px;">
-					<center><img src="images/logo.png"></center>
-				</div>
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-warning emailpass">Email and Password</li>
 					<li class="list-group-item list-group-item-success hostserver">Host</li>
@@ -22,7 +26,7 @@
 					<li class="list-group-item list-group-item-danger conn">Connection</li>
 				</ul>
 			</div>
-			<div class="col-md-10" style="padding: 5%;">
+			<div class="col-md-10">
 				<form method="post">
 					<div class="form-row">
 						<div class="form-group col-md-6">
