@@ -8,28 +8,19 @@
 <html>
 <head>
 	<title>Dashboard</title>
-	<meta name="keyword" content="tata sponge, carpool, car, car application"/>
-	<meta name="description" property="og:description" content="Book yor car instantly with TATA steel carpool network."/>
-	<meta name="abstract" content="Car pool network of TATA sponge limited"/>
-	<meta name="copyright"content="TATA Sponge Ltd.">
-	<meta name="language" content="en">
-	<meta name="robots" content="index, follow">
-
-	<meta name="og:url" property="og:url" content="<?php echo $_SERVER['HTTP_HOST']; ?>"/>
 	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: Dashboard"/>
-	<meta property="og:site_name" content="Car pool network">
-
-	<link rel="shortcut icon" href="favicon.ico" />
-
-	<meta name="og:image" property="og:image" content="[poster-url]">
-	<meta property="og:image:type" content="image/jpg">
-	<meta property="og:image:width" content="128">
-	<meta property="og:image:height" content="128">
-
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+	<?php
+		include 'core/meta.php';
+	?>
 	<link rel="stylesheet" href="css/core.css">
-	<link rel="stylesheet" href="css/---.css">
-
+	<style type="text/css">
+		.paper_form input{
+			border: 0px;
+		}
+		.paper_form label{
+			padding: 0 0 0 15px;
+		}
+	</style>
 </head>
 <body>
 	<?php
@@ -44,45 +35,62 @@
 				?>
 			</div>
 			<div class="col-md-9">
-				<br>
-				<form>
-					<center><h1 class="text-white bg-dark">Application</h1></center>
-					<div>
-						<span class="text-success">Application id:</span>
-						<span class="text-success" style="float: right;padding-right:60px;">Draft id</span>
-				</div>
-				<br><div class="form-row">
+				<center>
+					<h1>Application for vehicle</h1>
+				</center>
+				<br/>
+				<form class="paper_form">
+					<div class="form-row justify-content-between">
 						<div class="form-group col-md-4">
-							<!-- <label for="name"></label> -->
-							<input type="text" class="form-control" id="name" value="" placeholder="To">
+							<label class="text-success">Application ID : ---</label>
+						</div>
+						<div class="form-group col-md-4">
+							<label class="text-success">Draft ID : ---</label>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<!-- <label for="dept"></label> -->
-							<input type="text" class="form-control" id="dept" value="" placeholder="Department">
+							<label>Respected Sir,</label>
+							<input type="text" class="form-control" id="name" value="" placeholder="Name of the person">
 						</div>
 					</div>
-					<div class="form-row">
+					<div class="form-row justify-content-between">
 						<div class="form-group col-md-4">
-							<!-- <label for="dept"></label> -->
-							<input type="text" class="form-control" id="dept" value="" placeholder="Application Date">
+							<label>Accounts Department</label>
 						</div>
-					</div>
-					<div class="form-row">
 						<div class="form-group col-md-4">
-							<!-- <label for="dept"></label> -->
-							<input type="text" class="form-control" id="dept" value="" placeholder="from">
+							<label> Date: <?php echo date("d M Y", time()); ?></label>
 						</div>
 					</div>
-						<div class="form-group">
-						    <label for="exampleFormControlTextarea1">Message</label>
-						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-						  </div>
-					     <center><button type="button" class="btn btn-primary">Submit</button></center> 
+					<div class="form-row justify-content-between">
+						<div class="form-group col-md-4">
+							<label for="startingDate">Starting Date</label>
+							<input type="date" class="form-control" id="startingDate" value="" >
+						</div>
+						<div class="form-group col-md-4">
+							<label for="endDate">End Date</label>
+							<input type="date" class="form-control" value="" id="endDate">
 						</div>
 					</div>
-				</div>
+					<div class="form-row justify-content-between">
+						<div class="form-group col-md-4">
+							<label for="vehicleType">Requesting Vehicle</label>
+							<input type="text" class="form-control" value="" id="vehicleType" placeholder="Bus, Car, Bike">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlTextarea1">Message</label>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+						<label class="form-check-label" for="defaultCheck1">Receive Notification</label>
+					</div>
+					<br>
+					<button type="button" class="btn btn-primary">Save to Draft</button>
+					<button type="button" class="btn btn-primary">Apply</button>
+				</form>
+				<br><br>
 			</div>
 		</div>
 	</div>
