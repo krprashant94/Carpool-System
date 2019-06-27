@@ -189,8 +189,15 @@
 			echo 'swal({title:"'.$apply_message.'",icon: "error"});';
 		}
 	?>
+
 	$("#sendingTo").keyup(function (e) {
 		console.log(this.value);
+		$.ajax({
+			url: "ajax/install.php?email=",
+			success: function(result){
+				h
+			},
+		});
 	});
 </script>
 </html>
