@@ -119,10 +119,7 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-4" style="padding: 10px; border: 1px solid black;">
-							<label style="border: 1px dotted black; width: 100%; cursor: pointer;" onclick="alert('ok')">Jay Kumar (Accounts Department)</label>
-							<label style="border: 1px dotted black; width: 100%; cursor: pointer;" onclick="alert('ok')">Kishor Kumar (Accounts Department)</label>
-							<label style="border: 1px dotted black; width: 100%; cursor: pointer;" onclick="alert('ok')">Mayank Kumar (Accounts Department)</label>
+						<div class="form-group col-md-8" id="helper">
 						</div>
 					</div>
 					<div class="form-row justify-content-between">
@@ -190,12 +187,23 @@
 		}
 	?>
 
+	function set_application_reciver(id) {
+		$('#helper').html("");
+		$('#sending_to_id').val(id);
+		$('#sending_to_id').val(e);
+		console.log(e);
+	}
 	$("#sendingTo").keyup(function (e) {
-		console.log(this.value);
 		$.ajax({
-			url: "ajax/install.php?email=",
+			url: "ajax/get_suggestion.php?q="+this.value,
+			dataType: 'JSON',
 			success: function(result){
-				h
+				console.log(result);
+				$('#helper').html("");
+				for (var i = result.length - 1; i >= 0; i--) {
+					console.log(result[i]);
+					$('#helper').append('<label style="border: 1px dotted black; width: 100%; cursor: pointer;" onclick="set_application_reciver(\''+result[i]['id']+'\')">'+result[i]['f_name']+' '+result[i]['m_name']+' '+result[i]['surname']+' ('+result[i]['department']+')</label>');
+				}
 			},
 		});
 	});

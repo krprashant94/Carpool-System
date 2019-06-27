@@ -78,6 +78,26 @@
 			return $data;
 			
 		}
+
+		function search_by_name($keyword){
+			$keyword = explode(' ', $keyword);
+			if (count($keyword) == 1) {
+				$query = "SELECT * FROM user WHERE f_name LIKE '%".$keyword[0]."%' AND auth_level > 0 LIMIT 3;";  
+
+			}elseif (count($keyword) == 2) {
+				$query = "SELECT * FROM user WHERE f_name LIKE '%".$keyword[0]."%' AND surname LIKE '%".$keyword[1]."%' AND auth_level > 0 LIMIT 3;";  
+
+			}elseif (count($keyword) == 3) {
+				$query="SELECT * FROM user WHERE f_name LIKE '%".$keyword[0]."%' AND m_name LIKE '%".$keyword[1]."%' OR surname LIKE '%".$keyword[2]."%' AND auth_level > 0 LIMIT 3;";  
+			}else{
+				$query="SELECT * FROM user WHERE auth_level > 0 LIMIT 3;";  
+			}
+			$result = $this->conn->prepare($query);
+			$result->execute();
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+			
+		}
 	}
 
 	// $u = new User($host, $db_name, $db_user, $db_pass);
