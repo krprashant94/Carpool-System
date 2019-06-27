@@ -28,7 +28,7 @@
 				?>
 			</div>
 			<div class="col-md-9">
-				<br><br><br><br>
+				<br><br>
 				<form>
 					<div class="form-row">
 						<div class="form-group col-md-4">
