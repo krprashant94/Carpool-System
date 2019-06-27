@@ -2,7 +2,6 @@
 	include 'core/core.inc.php';
 	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");  }
 	$reg_message = false;
-	print_r($_POST);
 	if (isset($_POST['register'])) {
 		if(empty($_POST['name'])){
 			$reg_message = "Your name is empty";
