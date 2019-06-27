@@ -16,5 +16,6 @@
 	<a href="application.php"><li class="list-group-item <?php if($active == 'application') echo "active_side_nav"; ?>">Application</li></a>
 	<a href="request.php"><li class="list-group-item <?php if($active == 'current') echo "active_side_nav"; ?>">Request</li></a>
 	<a href="forwordedd_application.php"><li class="list-group-item <?php if($active == 'forword') echo "active_side_nav"; ?>">Forwarded Application</li></a>
+	<a href="draftlist.php"><li class="list-group-item <?php if($active == 'draft') echo "active_side_nav"; ?>">Draft</li></a>
 	<a href="history.php"><li class="list-group-item <?php if($active == 'history') echo "active_side_nav"; ?>">History</li></a>
 </ul>
