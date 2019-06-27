@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-md-9">
 				<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand">Current Request List</a>
+  <a class="navbar-brand">Application History</a>
   <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -74,29 +74,6 @@
 
 
 
-			</div>
-		</div>
-	</div>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				
 			</div>
 		</div>
 	</div>
