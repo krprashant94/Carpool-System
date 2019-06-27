@@ -1,7 +1,7 @@
 <?php 
 	include 'core/core.inc.php';
 	if (!isset($_SESSION['user_id'])) {
-		// header("Location: login.php");
+		header("Location: login.php");
 	}
 ?>
 <!DOCTYPE html>
@@ -47,30 +47,35 @@
 				<table class="table table-striped table-hover">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">First</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
+							<th scope="col" style="width: 10%;">Serial no</th>
+							<th scope="col">Description</th>
+							<th scope="col" style="width: 20%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
+							<td>
+								<b>Mukesh Kumar</b> <b>(<i>Accounts</i>)</b> on 20-june-2019<br>
+
+								Application for honda city - <i>25-June-2019 to 26-June-2019</i>
+							</td>
+							<td><img src="images/accept.png" width="24px"> | <img src="images/reject.png" width="24px"> |  <img src="images/p.png" width="24px"> | <img src="images/notify.png" width="24px"></td>
 						</tr>
 						<tr>
 							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
+							<td><b>Raj Kumar</b> <b>(<i>Sales</i>)</b> on 20-june-2019<br>
+
+								Application for honda city - <i>25-June-2019 to 26-June-2019</i></td>
+							<td><img src="images/accept.png" width="24px"> | <img src="images/reject.png" width="24px"> |  <img src="images/p.png" width="24px"> | <img src="images/notify.png" width="24px"></td>
 						</tr>
 						<tr>
 							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
+							<td><b>Prashant Kumar</b> <b>(<i>Information Technology</i>)</b> on 20-june-2019<br>
+
+								Application for honda city - <i>25-June-2019 to 26-June-2019</i></td>
+							<td><img src="images/accept.png" width="24px"> | <img src="images/reject.png" width="24px"> |  <img src="images/p.png" width="24px"> | <img src="images/notify.png" width="24px"></td>
+
 						</tr>
 					</tbody>
 				</table>
