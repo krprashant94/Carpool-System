@@ -144,9 +144,13 @@
 						</div>
 					</div>
 					<div class="form-row justify-content-between">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-2">
 							<label for="vehicleType">Requesting Vehicle</label>
 							<input type="text" name="request" class="form-control" value="<?php if(isset($_GET['draft_id'])){ echo $draft_details['vehicle_req'];} ?>" id="vehicleType" placeholder="Bus, Car, Bike">
+						</div>
+						<div class="form-group col-md-10">
+							<label for="vehicleType">Pickup Location</label>
+							<input type="text" name="request" class="form-control" value="<?php if(isset($_GET['draft_id'])){ echo $draft_details['pickup_location'];} ?>" id="vehicleType" placeholder="Near air field">
 						</div>
 					</div>
 					<div class="form-group">

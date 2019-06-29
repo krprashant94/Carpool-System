@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2019 at 08:36 AM
+-- Generation Time: Jun 29, 2019 at 10:36 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -31,24 +31,26 @@ CREATE TABLE `applicatioin` (
   `applicant` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
   `message` text NOT NULL,
+  `pickup_location` varchar(100) NOT NULL,
   `application_date` varchar(10) NOT NULL,
   `department` varchar(50) NOT NULL,
-  `req_date` varchar(15) NOT NULL,
+  `start_date` varchar(15) NOT NULL,
   `ending_date` varchar(15) NOT NULL,
   `vehicle_req` varchar(50) NOT NULL,
   `vehicle_issue` varchar(20) NOT NULL,
   `notification` varchar(1) NOT NULL,
   `applied` varchar(1) NOT NULL DEFAULT 'N',
-  `issued_by` varchar(20) NOT NULL
+  `issued_by` varchar(20) NOT NULL,
+  `log` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `applicatioin`
 --
 
-INSERT INTO `applicatioin` (`draft_id`, `applicant`, `receiver`, `message`, `application_date`, `department`, `req_date`, `ending_date`, `vehicle_req`, `vehicle_issue`, `notification`, `applied`, `issued_by`) VALUES
-('OBAL2342', 6, 0, '', '', '', '', '', '', '', 'Y', 'N', ''),
-('TDJI1911', 6, 1, 'hg', '', '1', '2019-06-13', '2019-06-11', 'car', '', 'Y', 'Y', '');
+INSERT INTO `applicatioin` (`draft_id`, `applicant`, `receiver`, `message`, `pickup_location`, `application_date`, `department`, `start_date`, `ending_date`, `vehicle_req`, `vehicle_issue`, `notification`, `applied`, `issued_by`, `log`) VALUES
+('GPIQ62484', 2, 6, '', '', '', '1', '', '', 'Car', '', 'Y', 'Y', '', ''),
+('OERG60476', 6, 6, 'ksjhk', '', '', 'Accounts', '2019-06-07', '2019-06-07', 'Bus', '', 'Y', 'Y', '', '');
 
 -- --------------------------------------------------------
 
@@ -85,8 +87,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `password`, `image`, `f_name`, `m_name`, `surname`, `dob`, `house_no`, `address_l1`, `address_l2`, `landmark`, `pincode`, `city`, `state`, `country`, `mail_id`, `phone`, `blood_group`, `identification`, `department`, `auth_level`) VALUES
-(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', '', '', '', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 0, '', '', '', 0),
-(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'Accounts', 0);
+(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 0, '', '', 'HR', 1),
+(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'IT', 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +144,7 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

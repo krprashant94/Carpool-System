@@ -51,7 +51,7 @@
 						</div>
 						<div class="form-group col-md-5">
 							<label for="m_name">Phone Number</label>
-							<input type="text" class="form-control" id="m_name" value="">
+							<input type="number" class="form-control" id="m_name" value="">
 						</div>
 						<div class="form-group col-md-2">
 							<label for="inputState">Blood Group</label>
