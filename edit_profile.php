@@ -21,7 +21,7 @@
 	?>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col col-lg-3 side_nev">
+			<div class="col col-lg-3 side_nav">
 				<?php
 					$active = "edit";
 					require "core/side_nav.php";

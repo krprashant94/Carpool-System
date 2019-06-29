@@ -6,7 +6,8 @@
 	$apply_message = false;
 
 	if (isset($_POST['draft'])) {
-		if ($_POST['applied'] == 'N' && !empty($_POST['to'])) {
+		print_r($_POST);
+		if ($_POST['applied'] == 'N') {
 			require_once "core/application.db.php";
 			$a = new Application($host, $db_name, $db_user, $db_pass);
 			$draft_id = 0;
@@ -17,10 +18,10 @@
 				$draft_id = $_GET['draft_id'];
 			}
 
-			$a->update("receiver", $_POST['sending_to_id'], $draft_id);
+			$a->update("receiver", $_POST['sending_to'], $draft_id);
 			$a->update("message", $_POST['message'], $draft_id);
 			$a->update("department", $_POST['department'], $draft_id);
-			$a->update("req_date", $_POST['start_date'], $draft_id);
+			$a->update("start_date", $_POST['start_date'], $draft_id);
 			if (isset($_POST['onetime'])) {
 				$a->update("ending_date", $_POST['start_date'], $draft_id);
 			}else{
@@ -53,7 +54,7 @@
 			$apply_message = "You did not written about your need";
 		}elseif (empty($draft_details['department'])) {
 			$apply_message = "No any department associted with application receiver";
-		}elseif (empty($draft_details['req_date'])) {
+		}elseif (empty($draft_details['start_date'])) {
 			$apply_message = "When you need vehicle";
 		}elseif (empty($draft_details['vehicle_req'])) {
 			$apply_message = "Which kind of vehicle you need?";
@@ -88,7 +89,7 @@
 	?>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col col-lg-3 side_nev">
+			<div class="col col-lg-3 side_nav">
 				<?php
 					$active = "application";
 					require "core/side_nav.php";
@@ -125,12 +126,12 @@
 					<div class="form-row justify-content-between">
 						<div class="form-group col-md-3">
 							<label for="startingDate">Starting Date</label>
-							<input type="date" name="start_date" class="form-control" id="startingDate" value="<?php if(isset($draft_details['req_date'])){ echo $draft_details['req_date'];} ?>" >
+							<input type="date" name="start_date" class="form-control" id="startingDate" value="<?php if(isset($draft_details['start_date'])){ echo $draft_details['start_date'];} ?>" >
 						</div>
 
 						<div class="custom-control custom-checkbox mr-md-3">
 							<input type="checkbox" class="custom-control-input" name="onetime" id="customControlAutosizing" <?php if (isset($_GET['draft_id'])) {
-									if ($draft_details['req_date'] == $draft_details['ending_date']) {
+									if ($draft_details['start_date'] == $draft_details['ending_date']) {
 										echo "checked";
 									}
 							}else{echo "checked";} ?>>
@@ -139,7 +140,7 @@
 
 						<div class="form-group col-md-3">
 							<label for="endDate">End Date</label>
-							<input type="date" name="end_date" class="form-control" value="<?php if(isset($draft_details['ending_date'])){ if($draft_details['req_date'] != $draft_details['ending_date']) echo $draft_details['ending_date'];} ?>" id="endDate">
+							<input type="date" name="end_date" class="form-control" value="<?php if(isset($draft_details['ending_date'])){ if($draft_details['start_date'] != $draft_details['ending_date']) echo $draft_details['ending_date'];} ?>" id="endDate">
 						</div>
 					</div>
 					<div class="form-row justify-content-between">
@@ -187,11 +188,11 @@
 		}
 	?>
 
-	function set_application_reciver(id) {
+	function set_application_reciver(id, depart, name) {
 		$('#helper').html("");
 		$('#sending_to_id').val(id);
-		$('#sending_to_id').val(e);
-		console.log(e);
+		$('#department').val(depart);
+		$('#sendingTo').val(name);
 	}
 	$("#sendingTo").keyup(function (e) {
 		$.ajax({
@@ -202,7 +203,7 @@
 				$('#helper').html("");
 				for (var i = result.length - 1; i >= 0; i--) {
 					console.log(result[i]);
-					$('#helper').append('<label style="border: 1px dotted black; width: 100%; cursor: pointer;" onclick="set_application_reciver(\''+result[i]['id']+'\')">'+result[i]['f_name']+' '+result[i]['m_name']+' '+result[i]['surname']+' ('+result[i]['department']+')</label>');
+					$('#helper').append('<label style="border: 1px dotted black; width: 100%; cursor: pointer;" onclick="set_application_reciver(\''+result[i]['id']+'\', \''+result[i]['department']+'\',\''+result[i]['f_name']+' '+result[i]['m_name']+' '+result[i]['surname']+'\' )">'+result[i]['f_name']+' '+result[i]['m_name']+' '+result[i]['surname']+' ('+result[i]['department']+')</label>');
 				}
 			},
 		});

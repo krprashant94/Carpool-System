@@ -1,20 +1,28 @@
 a:hover{
 	text-decoration:none;
 }
-.list-group-item{
-	background-color: #AFAFAF;
+.list_itm{
+	background: #5ABDFF;
 	border:0px;
 	cursor: pointer;
 	color: white;
+
+	-webkit-transition: background 0.7s; /* Safari prior 6.1 */
+	transition: background 0.7s;
 }
-.list-group-item:hover{
-	background-color: #5ABDFF;
+.list_itm:hover{
+	background: #6078EA;
+
 }
 .active_side_nav{
-	background-color: #5ABDFF;
+	background-color: #6078EA;
 }
-.side_nev{
-	background: #AFAFAF;
+.side_nav{
+	background: #5ABDFF;
 	min-height: 91.5vh;
 	padding: 0px;
+}
+.side_nav_top{
+	background: #17a2b8;
+	padding: 10px;
 }

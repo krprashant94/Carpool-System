@@ -1,8 +1,11 @@
 <?php 
 	include 'core/core.inc.php';
 	if (!isset($_SESSION['user_id'])) {
-		// header("Location: login.php");
+		header("Location: login.php");
 	}
+	include 'core/application.db.php';
+	$a = new Application($host, $db_name, $db_user, $db_pass);
+	$draft_list = $a->applicant_joint_details($_SESSION['user_id'], 'N');
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +24,7 @@
 	?>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col col-lg-3 side_nev">
+			<div class="col col-lg-3 side_nav">
 				<?php
 					$active = "draft";
 					require "core/side_nav.php";
@@ -38,36 +41,37 @@
 				<table class="table table-striped table-hover">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col" style="width: 10%;">Serial no</th>
-							<th scope="col">Description</th>
+							<th scope="col" style="width: 10%;">Draft no</th>
+							<th scope="col">Details</th>
 							<th scope="col" style="width: 20%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
+
+
+
+
+
+						<?php foreach ($draft_list as $key => $value): ?>
+						<tr class="<?=$value['draft_id'];?>">
+							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								<b>Mukesh Kumar</b> <b>(<i>Accounts</i>)</b> on 20-june-2019<br>
-
-								Application for honda city - <i>25-June-2019 to 26-June-2019</i>
+								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i><br>
+								<?php if ($value['start_date'] == $value['ending_date']): ?>
+									On <?=$value['start_date'];?> <i>for one time</i>
+								<?php else: ?>
+									For <i><?=$value['start_date'];?> to <?=$value['ending_date'];?></i>
+								<?php endif ?>
 							</td>
-							<td><img src="images/p.png" width="24px"> | <img src="images/send.png" width="32px"></td>
+							<td>
+								<a href="application.php?draft_id=<?=$value['draft_id'];?>"><img onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
+								<img onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px">
+							</td>
 						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td><b>Raj Kumar</b> <b>(<i>Sales</i>)</b> on 20-june-2019<br>
+						<?php endforeach ?>
 
-								Application for honda city - <i>25-June-2019 to 26-June-2019</i></td>
-							<td><img src="images/p.png" width="24px"> | <img src="images/send.png" width="32px"></td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td><b>Prashant Kumar</b> <b>(<i>Information Technology</i>)</b> on 20-june-2019<br>
 
-								Application for honda city - <i>25-June-2019 to 26-June-2019</i></td>
-							<td><img src="images/p.png" width="24px"> | <img src="images/send.png" width="32px"></td>
 
-						</tr>
 					</tbody>
 				</table>
 

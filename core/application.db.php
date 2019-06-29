@@ -71,6 +71,20 @@
 			return $data;
 			
 		}
+		function applicatioin_joint_details($user, $applied='Y'){
+			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.landmark, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = ? AND applicatioin.receiver = ?;";  
+			$result = $this->conn->prepare($query);
+			$result->execute(array($applied, $user));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		function applicant_joint_details($user, $applied='Y'){
+			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.landmark, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = ? AND applicatioin.applicant = ?;";  
+			$result = $this->conn->prepare($query);
+			$result->execute(array($applied, $user));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
 	}
 
 	// $a = new Application($host, $db_name, $db_user, $db_pass);

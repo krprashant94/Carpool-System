@@ -13,9 +13,15 @@
 
 			if(count($details1) == 1){
 				$_SESSION['user_id'] = $details1[0]['id'];
+				$_SESSION['auth_level'] = $details1[0]['auth_level'];
+				$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
+				$_SESSION['department'] = $details1[0]['department'];
 				header("Location: index.php");
 			}else if(count($details2) == 1){
 				$_SESSION['user_id'] = $details2[0]['id'];
+				$_SESSION['auth_level'] = $details2[0]['auth_level'];
+				$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
+				$_SESSION['department'] = $details1[0]['department'];
 				header("Location: index.php");
 			}else{
 				$login_message = "Invalid login information";
