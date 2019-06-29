@@ -1,8 +1,11 @@
 <?php 
 	include 'core/core.inc.php';
 	if (!isset($_SESSION['user_id'])) {
-		// header("Location: login.php");
+		header("Location: login.php");
 	}
+	include 'core/application.db.php';
+	$a = new Application($host, $db_name, $db_user, $db_pass);
+	$draft_list = $a->applicant_joint_details($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,14 +31,11 @@
 				?>
 			</div>
 			<div class="col-md-9">
+
 				<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand">Application History</a>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
-				<table class="table table-striped table-hover">
+					<a class="navbar-brand">Draft List</a>
+				</nav>
+				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Serial no</th>
@@ -44,33 +44,31 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
+
+
+
+
+
+
+						<?php foreach ($draft_list as $key => $value): ?>
+						<tr class="<?=$value['draft_id'];?>">
+							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								<b>Mukesh Kumar</b> <b>(<i>Accounts</i>)</b> on 20-june-2019<br>
-
-								Application for honda city - <i>25-June-2019 to 26-June-2019</i>
+								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i><br>
+								<?php if ($value['start_date'] == $value['ending_date']): ?>
+									On <?=$value['start_date'];?> <i>for one time</i>
+								<?php else: ?>
+									For <i><?=$value['start_date'];?> to <?=$value['ending_date'];?></i>
+								<?php endif ?>
 							</td>
-							<td><img src="images/p.png" width="24px"> | <img src="images/notify.png" width="24px"></td>
+							<td>
+								<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px">
+							</td>
 						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td><b>Raj Kumar</b> <b>(<i>Sales</i>)</b> on 20-june-2019<br>
+						<?php endforeach ?>
 
-								Application for honda city - <i>25-June-2019 to 26-June-2019</i></td>
-							<td><img src="images/p.png" width="24px"> | <img src="images/notify.png" width="24px"></td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td><b>Prashant Kumar</b> <b>(<i>Information Technology</i>)</b> on 20-june-2019<br>
-
-								Application for honda city - <i>25-June-2019 to 26-June-2019</i></td>
-							<td><img src="images/p.png" width="24px"> | <img src="images/notify.png" width="24px"></td>
-
-						</tr>
 					</tbody>
 				</table>
-
 
 
 
@@ -79,4 +77,17 @@
 	</div>
 
 </body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/swal.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready( function () {
+		$('#list_table').DataTable();
+	} );
+</script>
 </html>

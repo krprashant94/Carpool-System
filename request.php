@@ -41,16 +41,10 @@
 			</div>
 			<div class="col-md-9">
 
-
-
 				<nav class="navbar navbar-light bg-light">
 					<a class="navbar-brand">Current Request List</a>
-					<form class="form-inline">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form>
 				</nav>
-				<table class="table table-striped table-hover">
+				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Draft no</th>
@@ -96,7 +90,14 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/swal.js"></script>
+
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
 <script type="text/javascript">
+	$(document).ready( function () {
+		$('#list_table').DataTable();
+	} );
 	function reject(e) {
 		console.log(e);
 		$('.'+e).hide();
