@@ -6,7 +6,6 @@
 	$apply_message = false;
 
 	if (isset($_POST['draft'])) {
-		print_r($_POST);
 		if ($_POST['applied'] == 'N') {
 			require_once "core/application.db.php";
 			$a = new Application($host, $db_name, $db_user, $db_pass);
@@ -28,7 +27,8 @@
 				$a->update("ending_date", $_POST['end_date'], $draft_id);
 			}
 			
-			$a->update("vehicle_req", $_POST['request'], $draft_id);
+			$a->update("vehicle_req", $_POST['vehicle_req'], $draft_id);
+			$a->update("pickup_location", $_POST['pickup_location'], $draft_id);
 
 			$save_message = "Successfuly saved in draft";
 			$notify = 'N';
@@ -50,14 +50,16 @@
 	if (isset($_POST['apply'])) {
 		if (empty($draft_details['receiver'])) {
 			$apply_message = "Not a valid receiver";
-		}elseif (empty($draft_details['message'])) {
-			$apply_message = "You did not written about your need";
 		}elseif (empty($draft_details['department'])) {
 			$apply_message = "No any department associted with application receiver";
 		}elseif (empty($draft_details['start_date'])) {
 			$apply_message = "When you need vehicle";
 		}elseif (empty($draft_details['vehicle_req'])) {
 			$apply_message = "Which kind of vehicle you need?";
+		}elseif (empty($draft_details['pickup_location'])) {
+			$apply_message = "No pickup location specified, How we find you?";
+		}elseif (empty($draft_details['message'])) {
+			$apply_message = "You did not written about your need";
 		}else{
 			require_once "core/application.db.php";
 			$a = new Application($host, $db_name, $db_user, $db_pass);
@@ -146,11 +148,11 @@
 					<div class="form-row justify-content-between">
 						<div class="form-group col-md-2">
 							<label for="vehicleType">Requesting Vehicle</label>
-							<input type="text" name="request" class="form-control" value="<?php if(isset($_GET['draft_id'])){ echo $draft_details['vehicle_req'];} ?>" id="vehicleType" placeholder="Bus, Car, Bike">
+							<input type="text" name="vehicle_req" class="form-control" value="<?php if(isset($_GET['draft_id'])){ echo $draft_details['vehicle_req'];} ?>" id="vehicleType" placeholder="Bus, Car, Bike">
 						</div>
 						<div class="form-group col-md-10">
 							<label for="vehicleType">Pickup Location</label>
-							<input type="text" name="request" class="form-control" value="<?php if(isset($_GET['draft_id'])){ echo $draft_details['pickup_location'];} ?>" id="vehicleType" placeholder="Near air field">
+							<input type="text" name="pickup_location" class="form-control" value="<?php if(isset($_GET['draft_id'])){ echo $draft_details['pickup_location'];} ?>" id="vehicleType" placeholder="Near air field">
 						</div>
 					</div>
 					<div class="form-group">
