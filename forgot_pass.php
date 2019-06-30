@@ -1,6 +1,10 @@
 <?php 
 	include 'core/core.inc.php';
-	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");  }
+	if (isset($_POST["mail_id"]) & isset($_POST["phone"])) { header("Location: dashboard.php"); 
+
+	mail("pamelabanerjee11@gmail.com", "Forgot Password", "the Password is:", "\r\n", "parameters" );
+
+	 }
 ?>
 <!DOCTYPE html>
 <html>
