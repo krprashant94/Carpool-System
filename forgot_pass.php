@@ -1,10 +1,20 @@
 <?php 
 	include 'core/core.inc.php';
-	if (isset($_POST["mail_id"]) & isset($_POST["phone"])) { header("Location: dashboard.php"); 
+	if (isset($_POST['mail_id']) & isset($_POST['phone'])) {
+		if (!empty($_POST['mail_id'])) {
+			$msg = "First line of text\nSecond line of text";
+			$msg = wordwrap($msg,70);
+			mail("pamelabanerjee11@gmail.com","Reset Password :: TATA Sponge",$msg);
+	 		header("Location: index.php");
+		}elseif (!empty($_POST['phone'])) {
+		 	include 'core/user.db.php';
+			$u = new User($host, $db_name, $db_user, $db_pass);
+			print_r($u->random());
 
-	mail("pamelabanerjee11@gmail.com", "Forgot Password", "the Password is:", "\r\n", "parameters" );
-
-	 }
+			// $u->update("req_date", "3", "8");
+			// print_r($u->fetch_by_two_id("mail_id", "c066d45b7bb9b6baf10d6627a", "password", "kr.prashant94@gmail.com"));
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +52,7 @@
 									<input type="number" name="phone" class="form-control" id="exampleInputphone" placeholder="1234567890">
 								</div>
 								<br/>
-								<input type="button" class="btn btn-primary" onclick="swal('Operation Unavailable')" value="Reset">
+								<input type="submit" class="btn btn-primary" value="Reset">
 								<br/><br/>
 							</form>
 						</div>
