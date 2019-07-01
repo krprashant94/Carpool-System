@@ -78,7 +78,7 @@
 	<link rel="stylesheet" href="css/core.css">
 	<style type="text/css">
 		.paper_form input{
-			border: 0px;
+			/*border: 0px;*/
 		}
 		.paper_form label{
 			padding: 0 0 0 15px;

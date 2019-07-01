@@ -20,7 +20,7 @@
 	<a href="request.php"><li class="list-group-item list_itm <?php if($active == 'current') echo "active_side_nav"; ?>">Request</li></a>
 <?php endif ?>
 <?php if ($_SESSION['auth_level'] > 1): ?>
-	<a href="forwordedd_application.php"><li class="list-group-item list_itm <?php if($active == 'forword') echo "active_side_nav"; ?>">Forwarded Application</li></a>
+	<a href="forwarded_application.php"><li class="list-group-item list_itm <?php if($active == 'forword') echo "active_side_nav"; ?>">Forwarded Application</li></a>
 <?php endif ?>
 	
 	<a href="draftlist.php"><li class="list-group-item list_itm <?php if($active == 'draft') echo "active_side_nav"; ?>">Draft</li></a>

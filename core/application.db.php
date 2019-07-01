@@ -71,15 +71,22 @@
 			return $data;
 			
 		}
-		function applicatioin_joint_details($user, $applied='Y'){
-			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = ? AND applicatioin.receiver = ?;";  
+		function applicatioin_joint_details($user, $applied='Y', $fwd=0){
+			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = ? AND applicatioin.receiver = ? AND applicatioin.forwarded = ?;";  
 			$result = $this->conn->prepare($query);
-			$result->execute(array($applied, $user));
+			$result->execute(array($applied, $user, $fwd));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		function applicatioin_joint_details_fwd($user){
+			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = 'Y' AND applicatioin.forwarded = ?;";  
+			$result = $this->conn->prepare($query);
+			$result->execute(array($user));
 			$data=$result->fetchAll(PDO::FETCH_ASSOC);
 			return $data;
 		}
 		function applicant_joint_details($user, $applied='Y'){
-			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = ? AND applicatioin.applicant = ?;";  
+			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log, applicatioin.forwarded, applicatioin.status FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = ? AND applicatioin.applicant = ?;";  
 			$result = $this->conn->prepare($query);
 			$result->execute(array($applied, $user));
 			$data=$result->fetchAll(PDO::FETCH_ASSOC);

@@ -17,7 +17,7 @@
 		{
 			unset($this->conn);
 		}
-		private function random($length = 4)
+		public function random($length = 4)
 		{
 			$chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			$password = substr( str_shuffle( $chars ), 0, $length );
