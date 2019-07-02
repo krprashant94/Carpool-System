@@ -26,7 +26,7 @@
 		<div class="row">
 			<div class="col col-lg-3 side_nav">
 				<?php
-					$active = "draft";
+					$active = "Vehicle";
 					require "core/side_nav.php";
 				?>
 			</div>
@@ -43,9 +43,6 @@
 							<th scope="col" style="width: 10%;">Location</th>
 						</tr>
 				</table>
-
-
-
 
 			</div>
 		</div>
