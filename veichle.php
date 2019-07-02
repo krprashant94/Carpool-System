@@ -37,7 +37,7 @@
 					<div class="form-row justify-content-between">
 						<div class="form-group col-md-6">
 							<label for="V_no">Vehicle Number</label>
-							<input type="Number" name="V_no" class="form-control" id="V_no" value="" placeholder=" ">
+							<input type="text" name="V_no" class="form-control" id="V_no" value="" placeholder=" ">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="V_Type">Vehicle Type</label>
@@ -48,8 +48,8 @@
 							<input type="text" name="V_no" class="form-control" id="V_ST" value="" placeholder=" ">
 						</div>
 						<div class="form-group col-md-6">
-							<label for="A_id">Application ID</label>
-							<input type="text" name="A_id" class="form-control" id="A_id" value="" placeholder=" ">
+							<label for="location">Location</label>
+							<input type="text" name="location" class="form-control" id="location" value="" placeholder=" ">
 						</div>
 						<div>
 						 <button type="reset" class="btn btn-danger">Reset</button>
