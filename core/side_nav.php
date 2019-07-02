@@ -22,6 +22,9 @@
 <?php if ($_SESSION['auth_level'] > 1): ?>
 	<a href="forwarded_application.php"><li class="list-group-item list_itm <?php if($active == 'forword') echo "active_side_nav"; ?>">Forwarded Application</li></a>
 <?php endif ?>
+
+	<a href="vehiclelist.php"><li class="list-group-item list_itm <?php if($active == 'vehicle') echo "active_side_nav"; ?>">Vehicle List</li></a>
+	<a href="vehicle.php"><li class="list-group-item list_itm <?php if($active == 'vehicle') echo "active_side_nav"; ?>">Vehicle Registration </li></a>
 	
 	<a href="draftlist.php"><li class="list-group-item list_itm <?php if($active == 'draft') echo "active_side_nav"; ?>">Draft</li></a>
 
