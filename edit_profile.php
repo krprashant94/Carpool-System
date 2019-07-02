@@ -29,29 +29,29 @@
 			</div>
 			<div class="col-md-9">
 				<br><br>
-				<form>
+				<form class="needs-validation" novalidate>
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label for="f_name">First name</label>
-							<input type="email" class="form-control" id="f_name" value="">
+							<input type="text" class="form-control" id="f_name" name="f_name" value="">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="m_name">Middle name</label>
-							<input type="text" class="form-control" id="m_name" value="">
+							<input type="text" class="form-control" id="m_name" name="m_name" value="">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="surname">Surname</label>
-							<input type="text" class="form-control" id="surname" value="">
+							<input type="text" class="form-control" id="surname" name="surname" value="">
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-5">
-							<label for="f_name">Email</label>
-							<input type="email" class="form-control" id="f_name" value="" readonly>
+							<label for="emailid">Email</label>
+							<input type="email" class="form-control" id="emailid" name="emailid" value=" " readonly>
 						</div>
 						<div class="form-group col-md-5">
-							<label for="m_name">Phone Number</label>
-							<input type="number" class="form-control" id="m_name" value="">
+							<label for="p_no">Phone Number</label>
+							<input type="number" class="form-control" id="p_no" name="p_no" value="">
 						</div>
 						<div class="form-group col-md-2">
 							<label for="inputState">Blood Group</label>
@@ -71,55 +71,54 @@
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label for="old_password">Old Password</label>
-							<input type="password" class="form-control" id="old_password" value="" autocomplete="new-password">
+							<input type="password" class="form-control" id="old_password" name="old_password" value="" autocomplete="new-password">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="new_password">New Password</label>
-							<input type="password" class="form-control" id="new_password" value="">
+						<input type="password" class="form-control" onchange="validateNewPassword(this)" id="new_password" name="new_password" value=" ">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="confirm_password">Confirm Password</label>
-							<input type="password" class="form-control" id="confirm_password" value="">
+							<input type="password" class="form-control" id="confirm_password" name="confirm_password"  value="">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="inputAddress">House No</label>
-						<input type="text" class="form-control" id="inputAddress" value=" ">
+						<input type="text" class="form-control" onchange="validateHouseNo(this)" id="inputAddress" name="inputAddress" value=" ">
 					</div>
 					<div class="form-group">
-						<label for="inputAddress">Line 1</label>
-						<input type="text" class="form-control" id="inputAddress" value="">
-					</div>
+                      <label for="inputAddress2">Line 1</label>
+						<input type="text" class="form-control" onchange="validateLine1(this)" id="inputAddress2" name="inputAddress2" value=" ">
+				</div>
 					<div class="form-group">
-						<label for="inputAddress">Line 2</label>
-						<input type="text" class="form-control" id="inputAddress" value="">
+						<label for="inputAddress3">Line 3</label>
+						<input type="text" class="form-control" id="inputAddress3" name="line2" value="">
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-3">
 							<label for="inputCity">City</label>
-							<input type="text" class="form-control" id="inputCity" value="">
+							<input type="text" class="form-control" id="inputCity" name="inputCity" value="">
 						</div>
 						<div class="form-group col-md-4">
-							<label for="inputCity">State</label>
-							<input type="text" class="form-control" id="inputCity" value="">
+							<label for="inputState">State</label>
+							<input type="text" class="form-control" id="inputState" name="inputState" value="">
 						</div>
 						<div class="form-group col-md-2">
 							<label for="inputZip">Zip</label>
-							<input type="text" class="form-control" id="inputZip" value="">
+							<input type="text" class="form-control" id="inputZip" name="inputZip" value="">
 						</div>
 						<div class="form-group col-md-3">
-							<label for="inputCity">Country</label>
-							<input type="text" class="form-control" id="inputCity" value="">
+							<label for="inputCountry">Country</label>
+							<input type="text" class="form-control" id="inputCountry" name="inputCountry" value="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputAddress2">Landmark</label>
-						<input type="text" class="form-control" id="inputAddress2" placeholder="" value="">
+						<input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="" value="">
 					</div>
 					<div class="form-group">
-						<label for="inputAddress2">Identification Mark</label>
-						<input type="text" class="form-control" id="inputAddress2" placeholder="" value="">
+						<label for="inputidentification">Identification Mark</label>
+						<input type="text" class="form-control" id="Inputidentification" name="Inputidentification" placeholder="" value="">
 					</div>
 					<button type="submit" class="btn btn-danger">Discard</button>
 					<button type="submit" class="btn btn-primary">Save</button>
@@ -150,4 +149,8 @@
 	</div>
 
 </body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/swal.js"></script>
+<script type="text/javascript" src="js/edit.js"></script>
 </html>
