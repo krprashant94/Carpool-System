@@ -16,6 +16,11 @@
 		include 'core/meta.php';
 	?>
 	<link rel="stylesheet" href="css/core.css">
+	<style type="text/css">
+		#list_table img{
+			cursor: pointer;
+		}
+	</style>
 
 </head>
 <body>
@@ -82,6 +87,8 @@
 
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="js/listoperation.js"></script>
+
 
 <script type="text/javascript">
 	$(document).ready( function () {
