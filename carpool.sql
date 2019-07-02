@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2019 at 10:36 AM
+-- Generation Time: Jul 02, 2019 at 11:06 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -40,6 +40,8 @@ CREATE TABLE `applicatioin` (
   `vehicle_issue` varchar(20) NOT NULL,
   `notification` varchar(1) NOT NULL,
   `applied` varchar(1) NOT NULL DEFAULT 'N',
+  `status` varchar(200) NOT NULL DEFAULT 'Applied',
+  `forwarded` bigint(20) NOT NULL,
   `issued_by` varchar(20) NOT NULL,
   `log` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,9 +50,11 @@ CREATE TABLE `applicatioin` (
 -- Dumping data for table `applicatioin`
 --
 
-INSERT INTO `applicatioin` (`draft_id`, `applicant`, `receiver`, `message`, `pickup_location`, `application_date`, `department`, `start_date`, `ending_date`, `vehicle_req`, `vehicle_issue`, `notification`, `applied`, `issued_by`, `log`) VALUES
-('GPIQ62484', 2, 6, '', '', '', '1', '', '', 'Car', '', 'Y', 'Y', '', ''),
-('OERG60476', 6, 6, 'ksjhk', '', '', 'Accounts', '2019-06-07', '2019-06-07', 'Bus', '', 'Y', 'Y', '', '');
+INSERT INTO `applicatioin` (`draft_id`, `applicant`, `receiver`, `message`, `pickup_location`, `application_date`, `department`, `start_date`, `ending_date`, `vehicle_req`, `vehicle_issue`, `notification`, `applied`, `status`, `forwarded`, `issued_by`, `log`) VALUES
+('GPIQ62484', 2, 6, '', '', '', '1', '', '', 'Car', '', 'Y', 'Y', '', 0, '', ''),
+('SCQZ230925', 6, 1, '', '', '', '1', '', '', '', '', 'Y', 'N', '', 0, '', ''),
+('WEHR231059', 6, 1, '', '', '', '1', '', '', '', '', 'Y', 'N', '', 0, '', ''),
+('ZGUA230553', 6, 1, 'pam pam', 'moti maa ke paas', '', '1', '2019-05-29', '2019-05-29', 'car', '', 'Y', 'Y', '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -87,8 +91,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `password`, `image`, `f_name`, `m_name`, `surname`, `dob`, `house_no`, `address_l1`, `address_l2`, `landmark`, `pincode`, `city`, `state`, `country`, `mail_id`, `phone`, `blood_group`, `identification`, `department`, `auth_level`) VALUES
-(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 0, '', '', 'HR', 1),
-(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'IT', 1);
+(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 0, '', '', 'HR', 5),
+(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'IT', 5);
 
 -- --------------------------------------------------------
 
@@ -100,9 +104,9 @@ CREATE TABLE `vehicle` (
   `no` varchar(20) NOT NULL,
   `type` varchar(20) NOT NULL,
   `subtype` varchar(20) NOT NULL,
-  `status` varchar(10) NOT NULL,
+  `status` varchar(50) NOT NULL,
   `location` varchar(30) NOT NULL,
-  `app_id` varchar(20) NOT NULL
+  `app_id` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
@@ -110,7 +114,7 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`no`, `type`, `subtype`, `status`, `location`, `app_id`) VALUES
-('', '', '', '', '', '');
+('JH05AC1234', 'Bus', 'TATA Sumo', 'Available', 'Inside company', 'OERG60476');
 
 --
 -- Indexes for dumped tables
