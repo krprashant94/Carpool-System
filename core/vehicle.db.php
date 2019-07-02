@@ -17,17 +17,10 @@
 		{
 			unset($this->conn);
 		}
-		private function random($length = 4)
-		{
-			$chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			$password = substr( str_shuffle( $chars ), 0, $length );
-			return $password;
-		}
-		public function insert(...){
+		public function insert($no, $type, $subtype, $location){
 			try{
-				$draft = $this->random().(time()-1561404886);
-				$q = $this->conn->prepare("INSERT INTO vehicle (no, type, subtype, status, location, app_id) VALUES (?, ?, ?, ?, ?, ?);");
-				$q->execute(array(...));
+				$q = $this->conn->prepare("INSERT INTO vehicle (no, type, subtype, location) VALUES (?, ?, ?, ?);");
+				$q->execute(array($no, $type, $subtype, $location));
 				if($q->rowCount() == 1){ return true; }
 				return false;
 			}catch(PDOException $e){
@@ -36,7 +29,7 @@
 		}
 		public function delete($num){
 			try{
-				$q = $this->conn->prepare("DELETE FROM vehicle WHERE vehicle.id = ?;");
+				$q = $this->conn->prepare("DELETE FROM vehicle WHERE vehicle.no = ?;");
 				$q->execute(array($num));
 				if($q->rowCount() != 0){ return true; }
 				return false;
@@ -46,7 +39,7 @@
 		}
 		public function update($column, $new_val, $primery){
 			try{
-				$q = $this->conn->prepare("UPDATE vehicle SET ".$column." = ? WHERE vehicle.id = ?;");
+				$q = $this->conn->prepare("UPDATE vehicle SET ".$column." = ? WHERE vehicle.no = ?;");
 				$q->execute(array($new_val, $primery));
 				if($q->rowCount() != 0){ return true; }
 				return false;
@@ -69,7 +62,6 @@
 			$result->execute(array($id1, $id2));
 			$data=$result->fetchAll(PDO::FETCH_ASSOC);
 			return $data;
-			
 		}
 	}
 

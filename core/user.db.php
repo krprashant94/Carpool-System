@@ -41,6 +41,13 @@
 				echo "Error";
 			}
 		}
+		public function getName($id){
+			$query="SELECT CONCAT(f_name,' ',m_name,' ',surname) as name, department FROM user WHERE user.id = ?";
+			$result = $this->conn->prepare($query);
+			$result->execute(array($id));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
 		public function delete($user_id){
 			try{
 				$q = $this->conn->prepare("DELETE FROM user WHERE user.id = ?;");
