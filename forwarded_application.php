@@ -69,10 +69,12 @@
 								<?php endif ?>
 							</td>
 							<td>
-								<img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
-								<img onclick="forword('<?=$value['draft_id'];?>')" src="images/send.png" title="Forword to higher authority." width="20px"> | 
-								<img onclick="reject('<?=$value['draft_id'];?>')" src="images/reject.png" title="Reject this application" width="20px"> | 
-								<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this application" width="20px">
+								<center>
+									<img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
+									<img onclick="forword('<?=$value['draft_id'];?>')" src="images/send.png" title="Forword to higher authority." width="20px"> | 
+									<img onclick="reject('<?=$value['draft_id'];?>')" src="images/reject.png" title="Reject this application" width="20px"> | 
+									<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this application" width="20px">
+								</center>
 							</td>
 						</tr>
 						<?php endforeach ?>

@@ -26,8 +26,8 @@
 		public function insert($applicant, $receiver){
 			try{
 				$draft = $this->random().(time()-1561567370);
-				$q = $this->conn->prepare("INSERT INTO applicatioin (draft_id, applicant, receiver) VALUES (?, ?, ?);");
-				$q->execute(array($draft, $applicant, $receiver));
+				$q = $this->conn->prepare("INSERT INTO applicatioin (draft_id, applicant, receiver, application_date) VALUES (?, ?, ?, ?);");
+				$q->execute(array($draft, $applicant, $receiver, date('d-m-Y h:i A', time())));
 				if($q->rowCount() == 1){ return $draft; }
 				return false;
 			}catch(PDOException $e){

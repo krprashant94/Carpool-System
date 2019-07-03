@@ -109,10 +109,6 @@ function send_form(e) {
 		}
 	});
 
-
-
-
-
 }
 function pass(e) {
 	console.log(e);
@@ -130,6 +126,7 @@ function pass_form(e) {
 function view(e) {
 	console.log(e);
 	$('.'+e).hide();
+	// read_only_view.php?view_id=<?=$value['draft_id'];?>
 }
 
 function delete_application(draft_id) {

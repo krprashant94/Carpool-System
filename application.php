@@ -21,6 +21,7 @@
 			$a->update("message", $_POST['message'], $draft_id);
 			$a->update("department", $_POST['department'], $draft_id);
 			$a->update("start_date", $_POST['start_date'], $draft_id);
+
 			if (isset($_POST['onetime'])) {
 				$a->update("ending_date", $_POST['start_date'], $draft_id);
 			}else{
@@ -64,6 +65,7 @@
 			require_once "core/application.db.php";
 			$a = new Application($host, $db_name, $db_user, $db_pass);
 			$a->update("applied", 'Y', $_GET['draft_id']);
+			$a->update("application_date", date('d-m-Y h:i A', time()), $_GET['draft_id']);
 		}
 	}
 ?>

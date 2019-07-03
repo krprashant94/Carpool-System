@@ -33,14 +33,14 @@
 			<div class="col-md-9">
 
 				<nav class="navbar navbar-light bg-light">
-					<h5><a class="text-primary">History</a></h5>
+					<a class="navbar-brand">Draft List</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Serial no</th>
 							<th scope="col">Description</th>
-							<th scope="col" style="width: 10%;">Operation</th>
+							<th scope="col" style="width: 20%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,7 +54,7 @@
 						<tr class="<?=$value['draft_id'];?>">
 							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i><br>
+								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i> <small><?=$value['application_date'];?></small><br>
 								<?php if ($value['start_date'] == $value['ending_date']): ?>
 									On <?=$value['start_date'];?> <i>for one time</i>
 								<?php else: ?>
@@ -62,7 +62,9 @@
 								<?php endif ?>
 							</td>
 							<td>
-							<center><img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px"></center>
+								<center>
+									<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px">
+								</center>
 							</td>
 						</tr>
 						<?php endforeach ?>
@@ -89,5 +91,8 @@
 	$(document).ready( function () {
 		$('#list_table').DataTable();
 	} );
+</script>
+</html>
+ );
 </script>
 </html>

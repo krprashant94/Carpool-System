@@ -37,7 +37,7 @@
 			</div>
 			<div class="col-md-9">
 				<nav class="navbar navbar-light bg-light">
-					<h5><a class="text-primary">Draft List</a></h5>
+					<a class="text-primary">Draft List</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
@@ -61,8 +61,10 @@
 								<?php endif ?>
 							</td>
 							<td>
-								<center><a href="application.php?draft_id=<?=$value['draft_id'];?>"><img onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
-								<img onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px"></center>
+								<center>
+									<a href="application.php?draft_id=<?=$value['draft_id'];?>"><img onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
+									<img onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px">
+								</center>
 							</td>
 						</tr>
 						<?php endforeach ?>

@@ -42,14 +42,14 @@
 			<div class="col-md-9">
 
 				<nav class="navbar navbar-light bg-light">
-					<h5><a class="text-primary">Current Request List</a></h5>
+					<a class="navbar-brand">Current Request List</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Draft no</th>
 							<th scope="col">Details</th>
-							<th scope="col" style="width: 15%;">Operation</th>
+							<th scope="col" style="width: 20%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody class="applicatio_list">
@@ -65,10 +65,12 @@
 								<?php endif ?>
 							</td>
 							<td>
-								<center><img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
-								<img onclick="forword('<?=$value['draft_id'];?>')" src="images/send.png" title="Forword to higher authority." width="20px"> | 
-								<img onclick="reject('<?=$value['draft_id'];?>')" src="images/reject.png" title="Reject this application" width="20px"> | 
-								<a href="read_only_view.php?view_id=<?=$value['draft_id'];?>"> <img src="images/view.png" title="View this application" width="20px"></a></center>
+								<center>
+									<img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
+									<img onclick="forword('<?=$value['draft_id'];?>')" src="images/send.png" title="Forword to higher authority." width="20px"> | 
+									<img onclick="reject('<?=$value['draft_id'];?>')" src="images/reject.png" title="Reject this application" width="20px"> | 
+									<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this application" width="20px">
+								</center>
 							</td>
 						</tr>
 						<?php endforeach ?>
@@ -119,6 +121,39 @@
 		</div>
 	</div>
 </form>
+
+
+
+
+
+
+<form>
+	<div class="modal fade" id="applicationModel" tabindex="-1" role="dialog" aria-labelledby="applicationModelLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="applicationModelLabel">Forword this application</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+
+
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-success" onclick="send_form(this.form)">Send</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+
 
 
 

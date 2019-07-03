@@ -32,7 +32,7 @@
 			</div>
 			<div class="col-md-9">
 				<nav class="navbar navbar-light bg-light">
-					<h5><a class="text-primary">Vehicle List</a></h5>
+					<a class="text-primary">Vehicle List</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
