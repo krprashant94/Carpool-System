@@ -40,7 +40,7 @@
 						<tr>
 							<th scope="col" style="width: 10%;">Serial no</th>
 							<th scope="col">Description</th>
-							<th scope="col" style="width: 20%;">Operation</th>
+							<th scope="col" style="width: 10%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -62,7 +62,7 @@
 								<?php endif ?>
 							</td>
 							<td>
-								<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px">
+							<center><img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px"></center>
 							</td>
 						</tr>
 						<?php endforeach ?>
