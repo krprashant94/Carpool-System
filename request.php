@@ -42,14 +42,14 @@
 			<div class="col-md-9">
 
 				<nav class="navbar navbar-light bg-light">
-					<a class="navbar-brand">Current Request List</a>
+					<h5><a class="text-primary">Current Request List</a></h5>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Draft no</th>
 							<th scope="col">Details</th>
-							<th scope="col" style="width: 20%;">Operation</th>
+							<th scope="col" style="width: 15%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody class="applicatio_list">
@@ -65,10 +65,10 @@
 								<?php endif ?>
 							</td>
 							<td>
-								<img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
+								<center><img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
 								<img onclick="forword('<?=$value['draft_id'];?>')" src="images/send.png" title="Forword to higher authority." width="20px"> | 
 								<img onclick="reject('<?=$value['draft_id'];?>')" src="images/reject.png" title="Reject this application" width="20px"> | 
-								<a href="read_only_view.php?view_id=<?=$value['draft_id'];?>"> <img src="images/view.png" title="View this application" width="20px"></a>
+								<a href="read_only_view.php?view_id=<?=$value['draft_id'];?>"> <img src="images/view.png" title="View this application" width="20px"></a></center>
 							</td>
 						</tr>
 						<?php endforeach ?>

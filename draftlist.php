@@ -37,14 +37,14 @@
 			</div>
 			<div class="col-md-9">
 				<nav class="navbar navbar-light bg-light">
-					<a class="navbar-brand">Draft List</a>
+					<h5><a class="text-primary">Draft List</a></h5>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Draft no</th>
 							<th scope="col">Details</th>
-							<th scope="col" style="width: 20%;">Operation</th>
+							<th scope="col" style="width: 10%;">Operation</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,8 +61,8 @@
 								<?php endif ?>
 							</td>
 							<td>
-								<a href="application.php?draft_id=<?=$value['draft_id'];?>"><img onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
-								<img onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px">
+								<center><a href="application.php?draft_id=<?=$value['draft_id'];?>"><img onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
+								<img onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px"></center>
 							</td>
 						</tr>
 						<?php endforeach ?>

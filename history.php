@@ -33,7 +33,7 @@
 			<div class="col-md-9">
 
 				<nav class="navbar navbar-light bg-light">
-					<a class="navbar-brand">Draft List</a>
+					<h5><a class="text-primary">History</a></h5>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
