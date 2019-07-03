@@ -75,7 +75,7 @@
 
 			$a->update("log", $log, $_POST['draft_id']);
 			$a->update("status", "Rejected by ".$rejector['name']."(".$rejector['department'].")", $_POST['draft_id']);
-			
+			echo "true";
 		}elseif (isset($_POST['delete'])) {
 		// $_POST['draft_id'] = 'OERG60476';
 		// $_POST['delete'] = '-';
