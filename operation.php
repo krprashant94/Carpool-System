@@ -21,12 +21,12 @@
 			$fwd_details = $u->getName($fwd_to)[0];
 
 			if ($application_details['forwarded'] != 0) {
-				$cu_name = $u->getName($application_details['forwarded'])[0]['name'];
+				$cu_name = $u->getName($application_details['forwarded'])[0];
 			}else{
-				$cu_name = $u->getName($application_details['receiver'])[0]['name'];
+				$cu_name = $u->getName($application_details['receiver'])[0];
 			}
 
-			$log =  $application_details['log'].'<br>'.$cu_name." [Forwarded to ".$fwd_details['name']."]: ".$fwd_msg;
+			$log =  $application_details['log'].'<br>'.$cu_name['name']." (".$cu_name['department'].") : Forwarded to ".$fwd_details['name']." with message - ".$fwd_msg;
 
 			$a->update("forwarded", $fwd_to, $_POST['draft_id']);
 			$a->update("log", $log, $_POST['draft_id']);
@@ -48,12 +48,13 @@
 			$application_details = $a->fetch_by_id('draft_id', $_POST['draft_id'])[0];
 
 			$name = $u->getName($_SESSION['user_id'])[0];
-			$log =  $application_details['log'].'<br>'.$name['name']." : Approved your request.";
+			$log =  $application_details['log'].'<br>'.$name['name']." (".$name['department'].") : Approved your request.";
 			$a->update("status", "Approved by ".$name['name']."(".$name['department'].")", $_POST['draft_id']);
 			$a->update("log", $log, $_POST['draft_id']);
 			$a->update("issued_by", $_SESSION['user_id'], $_POST['draft_id']);
 			$a->update("vehicle_issue", $_POST['vichel_no'], $_POST['draft_id']);
 			$v->update("app_id", $_POST['draft_id'], $_POST['vichel_no']);
+			$v->update("status", "Last issue to ".$name['name'], $_POST['vichel_no']);
 
 			echo "true";
 
@@ -71,7 +72,7 @@
 
 			$rejector = $u->getName($_SESSION['user_id'])[0];
 
-			$log =  $application_details['log'].'<br>'.$rejector['name']." : Rejected with message - ".$_POST['reject_msg'];
+			$log =  $application_details['log'].'<br>'.$rejector['name']." (".$rejector['department'].") : Rejected with message - ".$_POST['reject_msg'];
 
 			$a->update("log", $log, $_POST['draft_id']);
 			$a->update("status", "Rejected by ".$rejector['name']."(".$rejector['department'].")", $_POST['draft_id']);

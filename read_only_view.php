@@ -22,47 +22,25 @@
 	$reciver_details = $u->fetch_by_id('id', $reciver)[0];
  ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Priview</title>
-	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: Dashboard"/>
-	<?php
-		include 'core/meta.php';
-	?>
-	<link rel="stylesheet" href="css/core.css">
-	<style type="text/css">
-		.box{
-			padding: 10px;
-		}
-	</style>
-</head>
-<body>
+<div class="box">
 
-	<div class="box">
+	To,<br>
+	<?=$reciver_name['name']?><br>
+	<?=$reciver_name['department']?><br><br>
+	
+	Date : <?=date('d-m-Y, h:i A', $application_details['application_date']);?><br><br>
+	<b><i>
+		Subject :Requesting for a vichle from <?=date('d-m-Y h:i A', $application_details['start_date']);?> to <?=date('d-m-Y h:i A', $application_details['ending_date']);?><br>
+		Pickup Location : <?=$application_details['pickup_location']?><br><br>
+	</i></b>
+	Sir,<br>
+	<?=$application_details['message']?><br><br>
 
-		To,<br>
-		<?=$reciver_name['name']?><br>
-		<?=$reciver_name['department']?><br><br>
-		
-		Date : <?=$application_details['application_date']?><br><br>
-		<b><i>
-			Subject :Requesting for a vichle from <?=$application_details['start_date']?> to <?=$application_details['ending_date']?><br>
-			Pickup Location : <?=$application_details['pickup_location']?><br><br>
-		</i></b>
-		Sir,<br>
-		<?=$application_details['message']?><br><br>
+	<?=$applicant_name['name']?><br>
+	<?=$applicant_details['department']?><br>
+	<a href="tel:<?=$applicant_details['phone']?>">+91 <?=$applicant_details['phone']?></a><br>
+	<a href="mailto:<?=$applicant_details['mail_id']?>"><?=$applicant_details['mail_id']?></a><br>
 
-		<?=$applicant_name['name']?><br>
-		<?=$applicant_details['department']?><br>
-		<a href="tel:<?=$applicant_details['phone']?>">+91 <?=$applicant_details['phone']?></a><br>
-		<a href="mailto:<?=$applicant_details['mail_id']?>"><?=$applicant_details['mail_id']?></a><br>
-
-		<br><br>
-
-		<button type="button" class="btn btn-primary">Forward</button>
-		<button type="button" class="btn btn-success">Accept</button>
-		<button type="button" class="btn btn-danger">Reject</button>
-	</div>
-</body>
-</html>
+	<br>
+	<code class="col-12" readonly><?=$application_details['log']?></code>
+</div>

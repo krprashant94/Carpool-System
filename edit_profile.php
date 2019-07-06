@@ -91,7 +91,7 @@
 						<input type="text" class="form-control" onchange="validateLine1(this)" id="inputAddress2" name="inputAddress2" value=" ">
 				</div>
 					<div class="form-group">
-						<label for="inputAddress3">Line 3</label>
+						<label for="inputAddress3">Line 2</label>
 						<input type="text" class="form-control" id="inputAddress3" name="line2" value="">
 					</div>
 					<div class="form-row">
@@ -112,9 +112,16 @@
 							<input type="text" class="form-control" id="inputCountry" name="inputCountry" value="">
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="inputAddress2">Landmark</label>
-						<input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="" value="">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputAddress2">House Landmark</label>
+							<input type="text" class="form-control" id="inputAddress2" name="inputAddress2" placeholder="" value="">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="dl_number">Driving License Number</label>
+							<input type="text" class="form-control" id="dl_number" name="dl_number" placeholder="" value="">
+						</div>
+
 					</div>
 					<div class="form-group">
 						<label for="inputidentification">Identification Mark</label>

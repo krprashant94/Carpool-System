@@ -16,7 +16,6 @@
 		include 'core/meta.php';
 	?>
 	<link rel="stylesheet" href="css/core.css">
-
 </head>
 <body>
 	<?php
@@ -33,33 +32,29 @@
 			<div class="col-md-9">
 
 				<nav class="navbar navbar-light bg-light">
-					<a class="navbar-brand">Draft List</a>
+					<a class="navbar-brand">History</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col" style="width: 10%;">Serial no</th>
 							<th scope="col">Description</th>
+							<th scope="col">Status</th>
 							<th scope="col" style="width: 20%;">Operation</th>
 						</tr>
 					</thead>
-					<tbody>
-
-
-
-
-
-
+					<tbody  class="applicatio_list">
 						<?php foreach ($draft_list as $key => $value): ?>
 						<tr class="<?=$value['draft_id'];?>">
 							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i> <small><?=$value['application_date'];?></small><br>
-								<?php if ($value['start_date'] == $value['ending_date']): ?>
-									On <?=$value['start_date'];?> <i>for one time</i>
-								<?php else: ?>
-									For <i><?=$value['start_date'];?> to <?=$value['ending_date'];?></i>
-								<?php endif ?>
+								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i> <small><?=date('d-m-Y, h:i A', $value['application_date']);?></small><br>
+								
+								For <i><?=date('d-m-Y, h:i A', $value['start_date']);?> to <?=date('d-m-Y, h:i A', $value['ending_date']);?></i>
+
+							</td>
+							<td>
+								<?=$value['status'];?>
 							</td>
 							<td>
 								<center>
@@ -78,11 +73,14 @@
 		</div>
 	</div>
 
+<?php  include_once 'core/model_operation.inc.php'; ?>
+
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/swal.js"></script>
 
+<script type="text/javascript" src="js/listoperation.js"></script>
 
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
@@ -91,8 +89,5 @@
 	$(document).ready( function () {
 		$('#list_table').DataTable();
 	} );
-</script>
-</html>
- );
 </script>
 </html>

@@ -37,7 +37,7 @@
 			</div>
 			<div class="col-md-9">
 				<nav class="navbar navbar-light bg-light">
-					<a class="text-primary">Draft List</a>
+					<a class="navbar-brand">Draft List</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
@@ -53,12 +53,8 @@
 						<tr class="<?=$value['draft_id'];?>">
 							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i><br>
-								<?php if ($value['start_date'] == $value['ending_date']): ?>
-									On <?=$value['start_date'];?> <i>for one time</i>
-								<?php else: ?>
-									For <i><?=$value['start_date'];?> to <?=$value['ending_date'];?></i>
-								<?php endif ?>
+								You applied for <i><?php if($value['vehicle_req']) echo $value['vehicle_req']; else echo "vehicle";?></i> <small><?=date('d-m-Y, h:i A', $value['application_date']);?></small><br>
+								For <i><?=date('d-m-Y, h:i A', $value['start_date']);?> to <?=date('d-m-Y, h:i A', $value['ending_date']);?></i>
 							</td>
 							<td>
 								<center>

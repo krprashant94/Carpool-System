@@ -105,6 +105,13 @@
 			return $data;
 			
 		}
+		public function getAdmins($auth_level){
+			$query="SELECT id, CONCAT( f_name, ' ', m_name, ' ', surname) as name, department FROM user WHERE auth_level >= ? AND auth_level != 0";
+			$result = $this->conn->prepare($query);
+			$result->execute(array($auth_level));
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
 	}
 
 	// $u = new User($host, $db_name, $db_user, $db_pass);

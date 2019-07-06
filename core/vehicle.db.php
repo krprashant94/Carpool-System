@@ -17,14 +17,14 @@
 		{
 			unset($this->conn);
 		}
-		public function insert($no, $type, $subtype, $location){
+		public function insert($type, $subtype, $driver, $number, $location){
 			try{
-				$q = $this->conn->prepare("INSERT INTO vehicle (no, type, subtype, location) VALUES (?, ?, ?, ?);");
-				$q->execute(array($no, $type, $subtype, $location));
+				$q = $this->conn->prepare("INSERT INTO vehicle (no, type, subtype, location, driver) VALUES (?, ?, ?, ?, ?);");
+				$q->execute(array($number, $type, $subtype, $location, $driver));
 				if($q->rowCount() == 1){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				echo false;
 			}
 		}
 		public function delete($num){
@@ -47,9 +47,15 @@
 				echo "Error";
 			}
 		}
-
+		public function getAvailable(){
+			$query="SELECT * FROM vehicle WHERE 1";
+			$result = $this->conn->prepare($query);
+			$result->execute();
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
 		function fetch_by_id($where, $id){
-			$query="SELECT * FROM vehicle WHERE (".$where."=?)";
+			$query="SELECT * FROM vehicle WHERE ".$where."=?";
 			$result = $this->conn->prepare($query);
 			$result->execute(array($id));
 			$data=$result->fetchAll(PDO::FETCH_ASSOC);

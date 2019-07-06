@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2019 at 11:06 AM
+-- Generation Time: Jul 06, 2019 at 03:56 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `applicatioin` (
   `draft_id` varchar(20) NOT NULL,
-  `applicant` int(11) NOT NULL,
-  `receiver` int(11) NOT NULL,
+  `applicant` bigint(20) NOT NULL,
+  `receiver` bigint(20) NOT NULL,
   `message` text NOT NULL,
   `pickup_location` varchar(100) NOT NULL,
-  `application_date` varchar(10) NOT NULL,
+  `application_date` varchar(20) NOT NULL,
   `department` varchar(50) NOT NULL,
-  `start_date` varchar(15) NOT NULL,
-  `ending_date` varchar(15) NOT NULL,
+  `start_date` varchar(20) NOT NULL,
+  `ending_date` varchar(20) NOT NULL,
   `vehicle_req` varchar(50) NOT NULL,
   `vehicle_issue` varchar(20) NOT NULL,
   `notification` varchar(1) NOT NULL,
@@ -51,10 +51,8 @@ CREATE TABLE `applicatioin` (
 --
 
 INSERT INTO `applicatioin` (`draft_id`, `applicant`, `receiver`, `message`, `pickup_location`, `application_date`, `department`, `start_date`, `ending_date`, `vehicle_req`, `vehicle_issue`, `notification`, `applied`, `status`, `forwarded`, `issued_by`, `log`) VALUES
-('GPIQ62484', 2, 6, '', '', '', '1', '', '', 'Car', '', 'Y', 'Y', '', 0, '', ''),
-('SCQZ230925', 6, 1, '', '', '', '1', '', '', '', '', 'Y', 'N', '', 0, '', ''),
-('WEHR231059', 6, 1, '', '', '', '1', '', '', '', '', 'Y', 'N', '', 0, '', ''),
-('ZGUA230553', 6, 1, 'pam pam', 'moti maa ke paas', '', '1', '2019-05-29', '2019-05-29', 'car', '', 'Y', 'Y', '', 0, '', '');
+('845949OHWN', 6, 6, 'cae', 'car', '1562403410', 'CSE', '1561923000', '1562268600', 'car', 'JH05AC1234', 'Y', 'Y', 'Approved by Prashant Kumar Prasad(IT)', 6, '6', '<br>Prashant Kumar Prasad (IT) : Forwarded to Prashant Kumar Prasad with message - pa<br>Prashant Kumar Prasad (IT) : Forwarded to Prashant Kumar Prasad with message - pass<br>Prashant Kumar Prasad (IT) : Approved your request.'),
+('846040RYOM', 6, 2, '', '', '1562413410', 'HR', '0', '0', '', '', 'Y', 'N', 'Applied', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -70,6 +68,7 @@ CREATE TABLE `user` (
   `m_name` varchar(20) NOT NULL,
   `surname` varchar(20) NOT NULL,
   `dob` varchar(10) NOT NULL,
+  `dl_no` varchar(20) NOT NULL,
   `house_no` varchar(10) NOT NULL,
   `address_l1` varchar(20) NOT NULL,
   `address_l2` varchar(20) NOT NULL,
@@ -90,9 +89,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `password`, `image`, `f_name`, `m_name`, `surname`, `dob`, `house_no`, `address_l1`, `address_l2`, `landmark`, `pincode`, `city`, `state`, `country`, `mail_id`, `phone`, `blood_group`, `identification`, `department`, `auth_level`) VALUES
-(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 0, '', '', 'HR', 5),
-(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'IT', 5);
+INSERT INTO `user` (`id`, `password`, `image`, `f_name`, `m_name`, `surname`, `dob`, `dl_no`, `house_no`, `address_l1`, `address_l2`, `landmark`, `pincode`, `city`, `state`, `country`, `mail_id`, `phone`, `blood_group`, `identification`, `department`, `auth_level`) VALUES
+(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 123456789, '', '', 'HR', 5),
+(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'IT', 5);
 
 -- --------------------------------------------------------
 
@@ -106,15 +105,16 @@ CREATE TABLE `vehicle` (
   `subtype` varchar(20) NOT NULL,
   `status` varchar(50) NOT NULL,
   `location` varchar(30) NOT NULL,
-  `app_id` varchar(30) NOT NULL
+  `app_id` varchar(30) NOT NULL,
+  `driver` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `vehicle`
 --
 
-INSERT INTO `vehicle` (`no`, `type`, `subtype`, `status`, `location`, `app_id`) VALUES
-('JH05AC1234', 'Bus', 'TATA Sumo', 'Available', 'Inside company', 'OERG60476');
+INSERT INTO `vehicle` (`no`, `type`, `subtype`, `status`, `location`, `app_id`, `driver`) VALUES
+('JH05AC1234', 'Car', 'TATA Sumo', 'Last issue to Prashant Kumar Prasad', 'Inside company', '845949OHWN', 0);
 
 --
 -- Indexes for dumped tables

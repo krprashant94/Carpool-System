@@ -81,7 +81,6 @@ function send_form(e) {
 				active_draft = null;
 
 				swal({
-					dangerMode: true,
 					title:"Draft forworded",
 					icon: "success"
 				});
@@ -117,16 +116,73 @@ function pass(e) {
 }
 
 function pass_form(e) {
-	console.log(e.vichel_no.value);
-	console.log(active_draft);
+	console.log(e.vichel_no.value, active_draft);
 	$('.'+active_draft).hide();
-	$('#passModel').modal('hide')
+	$('#passModel').modal('hide');
+	$.ajax({
+		type: "POST",
+		url: 'operation.php',
+		data: 'draft_id=' + active_draft + "&vichel_no=" + e.vichel_no.value,
+		dataType: 'HTML',
+		success: function (res) {
+			console.log(res);
+			if (res == 'true') {
+
+				$('.'+active_draft).hide();
+				$('#fwdModel').modal('hide')
+				$('.'+active_draft).hide();
+				active_draft = null;
+
+				swal({
+					title:"Application approved",
+					icon: "success"
+				});
+			}
+			else{
+				swal({
+					dangerMode: true,
+					title:"Unable to pass this application",
+					icon: "error"
+				});
+			}
+		},
+		error: function (e, xhr, state) {
+			$('.'+active_draft).hide();
+			$('#fwdModel').modal('hide')
+			active_draft = null;
+
+			console.log('Error [core/listoperation.js] : ',e);
+			swal({
+				dangerMode: true,
+				title:"Internal server error",
+				text:"With status "+state+"\nView console log for more details, if you are a webmaster." ,
+				icon: "error"
+			});
+		}
+	});
 	active_draft = null;
 }
 function view(e) {
 	console.log(e);
-	$('.'+e).hide();
-	// read_only_view.php?view_id=<?=$value['draft_id'];?>
+	$.ajax({
+		type: "GET",
+		url: 'read_only_view.php',
+		data: 'view_id='+e,
+		dataType: 'HTML',
+		success: function (res) {
+			$('#applicationModel .modal-body').html(res)
+			$('#applicationModel').modal('show')
+		},
+		error: function (e, xhr, state) {
+			console.log('Error [core/listoperation.js] : ',e);
+			swal({
+				dangerMode: true,
+				title:"Internal server error",
+				text:"With status "+state+"\nView console log for more details, if you are a webmaster." ,
+				icon: "error"
+			});
+		}
+	});
 }
 
 function delete_application(draft_id) {

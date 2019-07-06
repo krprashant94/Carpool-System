@@ -25,9 +25,10 @@
 		}
 		public function insert($applicant, $receiver){
 			try{
-				$draft = $this->random().(time()-1561567370);
+				$draft = (time()-1561567370).$this->random();
 				$q = $this->conn->prepare("INSERT INTO applicatioin (draft_id, applicant, receiver, application_date) VALUES (?, ?, ?, ?);");
-				$q->execute(array($draft, $applicant, $receiver, date('d-m-Y h:i A', time())));
+				$q->execute(array($draft, $applicant, $receiver, time()));
+				// $q->execute(array($draft, $applicant, $receiver, date('d-m-Y h:i A', time())));
 				if($q->rowCount() == 1){ return $draft; }
 				return false;
 			}catch(PDOException $e){
@@ -79,7 +80,7 @@
 			return $data;
 		}
 		function applicatioin_joint_details_fwd($user){
-			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = 'Y' AND applicatioin.forwarded = ? AND applicatioin.status NOT LIKE 'Rejected%';";  
+			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, applicatioin.draft_id, applicatioin.message, applicatioin.pickup_location, applicatioin.application_date, applicatioin.start_date, applicatioin.ending_date, applicatioin.vehicle_req, applicatioin.vehicle_issue, applicatioin.notification, applicatioin.applied, applicatioin.issued_by, applicatioin.log FROM applicatioin LEFT JOIN user on user.id = applicatioin.applicant WHERE applied = 'Y' AND applicatioin.forwarded = ? AND applicatioin.status NOT LIKE 'Approved%' AND applicatioin.status NOT LIKE 'Rejected%';";  
 			$result = $this->conn->prepare($query);
 			$result->execute(array($user));
 			$data=$result->fetchAll(PDO::FETCH_ASSOC);

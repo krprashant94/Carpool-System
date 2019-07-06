@@ -26,3 +26,6 @@ a:hover{
 	background: #17a2b8;
 	padding: 10px;
 }
+.applicatio_list img{
+	cursor: pointer;
+}

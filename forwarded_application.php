@@ -51,22 +51,13 @@
 							<th scope="col" style="width: 20%;">Operation</th>
 						</tr>
 					</thead>
-					<tbody>
-
-
-
-
-
+					<tbody class="applicatio_list">
 						<?php foreach ($draft_list as $key => $value): ?>
 						<tr class="<?=$value['draft_id'];?>">
 							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								<b><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> (<i><?=$value['department'];?></b></i>) on 20-june-2019<br>
-								<?php if ($value['start_date'] == $value['ending_date']): ?>
-									Need <?=$value['vehicle_req'];?> on <?=$value['start_date'];?> <i>for one time</i>
-								<?php else: ?>
-									Need <?=$value['vehicle_req'];?> for <i><?=$value['start_date'];?> to <?=$value['ending_date'];?></i>
-								<?php endif ?>
+								<b><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> (<i><?=$value['department'];?></b></i>) on <?=date('d-m-Y, h:i A', $value['application_date']);?><br>
+								For <i><?=date('d-m-Y, h:i A', $value['start_date']);?> to <?=date('d-m-Y, h:i A', $value['ending_date']);?></i>
 							</td>
 							<td>
 								<center>
@@ -97,11 +88,15 @@
 		</div>
 	</div>
 
+<?php  include_once 'core/model_operation.inc.php'; ?>
+
 </body>
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/swal.js"></script>
+
+<script type="text/javascript" src="js/listoperation.js"></script>
 
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>

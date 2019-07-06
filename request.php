@@ -16,16 +16,6 @@
 		include 'core/meta.php';
 	?>
 	<link rel="stylesheet" href="css/core.css">
-<!-- 
-	<link rel="stylesheet" type="text/css" href="css/datatables.js">
-	<link rel="stylesheet" type="text/css" href="css/datatables.min.js">
-	<link rel="stylesheet" type="text/css" href="css/datatables.css">
-	<link rel="stylesheet" type="text/css" href="css/datatables.min.css"> -->
-	<style type="text/css">
-		.applicatio_list img{
-			cursor: pointer;
-		}
-	</style>
 </head>
 <body>
 	<?php
@@ -57,12 +47,8 @@
 						<tr class="<?=$value['draft_id'];?>">
 							<th scope="row"><?=$value['draft_id'];?></th>
 							<td>
-								<b><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> (<i><?=$value['department'];?></b></i>) on 20-june-2019<br>
-								<?php if ($value['start_date'] == $value['ending_date']): ?>
-									Need <?=$value['vehicle_req'];?> on <?=$value['start_date'];?> <i>for one time</i>
-								<?php else: ?>
-									Need <?=$value['vehicle_req'];?> for <i><?=$value['start_date'];?> to <?=$value['ending_date'];?></i>
-								<?php endif ?>
+								<b><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> (<i><?=$value['department'];?></b></i>) on <?=date('d-m-Y, h:i A', $value['application_date']);?><br>
+								For <i><?=date('d-m-Y, h:i A', $value['start_date']);?> to <?=date('d-m-Y, h:i A', $value['ending_date']);?></i>
 							</td>
 							<td>
 								<center>
@@ -83,111 +69,7 @@
 	</div>
 
 
-
-
-
-<form>
-	<div class="modal fade" id="fwdModel" tabindex="-1" role="dialog" aria-labelledby="fwdModelLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="fwdModelLabel">Forword this application</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-
-					<div class="form-group row">
-						<label for="inputEmail3" class="col-sm-3 col-form-label">Forword To</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEmail3" name="fwd_name" placeholder="Forword to">
-							<input type="hidden" name="forword_to" value="6">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="inputPassword3" class="col-sm-3 col-form-label">Message</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputPassword3" name="message" placeholder="Message">
-						</div>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success" onclick="send_form(this.form)">Send</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-
-
-
-
-
-
-<form>
-	<div class="modal fade" id="applicationModel" tabindex="-1" role="dialog" aria-labelledby="applicationModelLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="applicationModelLabel">Forword this application</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-
-
-
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success" onclick="send_form(this.form)">Send</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-
-
-
-
-
-<form>
-	<div class="modal fade" id="passModel" tabindex="-1" role="dialog" aria-labelledby="passModelLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="passModelLabel">Approve this application</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-
-					<div class="form-group row">
-						<label for="inputEmail3" class="col-sm-5 col-form-label">Vichel Number</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="inputEmail3" name="vichel_no" placeholder="Forword to">
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success" onclick="pass_form(this.form)">Approve</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-
-
-
-
+<?php  include_once 'core/model_operation.inc.php'; ?>
 
 
 

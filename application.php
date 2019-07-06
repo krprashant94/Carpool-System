@@ -5,7 +5,19 @@
 	$save_message = false;
 	$apply_message = false;
 
+	require_once "core/user.db.php";
+	$u = new User($host, $db_name, $db_user, $db_pass);
+
 	if (isset($_POST['draft'])) {
+		$start_timestamp  = 0;
+		$end_timestamp = 0;
+
+		if(!empty($_POST['start_date']) && $_POST['start_time']){
+			$start_timestamp = strtotime($_POST['start_date'].' '.$_POST['start_time']);
+		}
+		if(!empty($_POST['end_date']) && $_POST['end_time']){
+			$end_timestamp = strtotime($_POST['end_date'].' '.$_POST['end_time']);
+		}
 		if ($_POST['applied'] == 'N') {
 			require_once "core/application.db.php";
 			$a = new Application($host, $db_name, $db_user, $db_pass);
@@ -17,17 +29,11 @@
 				$draft_id = $_GET['draft_id'];
 			}
 
-			$a->update("receiver", $_POST['sending_to'], $draft_id);
+			$a->update("receiver", $_POST['to'], $draft_id);
 			$a->update("message", $_POST['message'], $draft_id);
-			$a->update("department", $_POST['department'], $draft_id);
-			$a->update("start_date", $_POST['start_date'], $draft_id);
-
-			if (isset($_POST['onetime'])) {
-				$a->update("ending_date", $_POST['start_date'], $draft_id);
-			}else{
-				$a->update("ending_date", $_POST['end_date'], $draft_id);
-			}
-			
+			$a->update("department", $u->getName($_POST['to'])[0]['department'], $draft_id);
+			$a->update("start_date", $start_timestamp, $draft_id);
+			$a->update("ending_date", $end_timestamp, $draft_id);
 			$a->update("vehicle_req", $_POST['vehicle_req'], $draft_id);
 			$a->update("pickup_location", $_POST['pickup_location'], $draft_id);
 
@@ -47,6 +53,14 @@
 		require_once "core/application.db.php";
 		$a = new Application($host, $db_name, $db_user, $db_pass);
 		$draft_details = $a->fetch_by_id('draft_id', $_GET['draft_id'])[0];
+		$start_date = date('Y-m-d', $draft_details['start_date']);
+		$start_time = date('H:i', $draft_details['start_date']);
+		$end_date = date('Y-m-d', $draft_details['ending_date']);
+		$end_time = date('H:i', $draft_details['ending_date']);
+
+		if ($draft_details['applied'] == 'Y') {
+			header("Location: application.php");
+		}
 	}
 	if (isset($_POST['apply'])) {
 		if (empty($draft_details['receiver'])) {
@@ -65,9 +79,13 @@
 			require_once "core/application.db.php";
 			$a = new Application($host, $db_name, $db_user, $db_pass);
 			$a->update("applied", 'Y', $_GET['draft_id']);
-			$a->update("application_date", date('d-m-Y h:i A', time()), $_GET['draft_id']);
+			$a->update("status", 'Y', 'Application received');
+			$a->update("log", 'Y', 'Application received');
+			$a->update("application_date", time(), $_GET['draft_id']);
 		}
 	}
+
+	$admin_list = $u->getAdmins($_SESSION['auth_level']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -105,10 +123,7 @@
 				</center>
 				<br/>
 				<form class="paper_form" method="POST">
-					<input type="hidden" name="sending_to" id="sending_to_id" value="1">
-					<input type="hidden" name="department" id="department" value="1">
 					<input type="hidden" name="applied" value="<?php if(isset($_GET['draft_id'])){echo $draft_details['applied'];}else{ echo "N";} ?>">
-
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label class="text-success"><b>Application ID : <?php if (isset($_GET['draft_id'])) { echo $_GET['draft_id'];} ?></b></label>
@@ -116,8 +131,12 @@
 					</div>
 					<div class="form-row justify-content-between">
 						<div class="form-group col-md-4">
-							<label for="sendingTo">Respected Sir,</label>
-							<input type="text" name="to" class="form-control" id="sendingTo" value="" placeholder="Name of the person">
+							<label for="sendingTo">Respected Sir/Madem,</label>
+							<select name="to" class="form-control" id="sendingTo" >
+								<?php foreach ($admin_list as $key => $value): ?>
+									<option <?php if(isset($draft_details['receiver'])) if($draft_details['receiver'] == $value['id']){echo "selected";}?> value="<?=$value['id']?>"><?=$value['name']?> (<?=$value['department']?>)</option>
+								<?php endforeach ?>
+							</select>
 						</div>
 						<div class="form-group col-md-4">
 							<label> Date: <?php echo date("d M Y", time()); ?></label>
@@ -125,26 +144,27 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-8" id="helper">
+							delete
 						</div>
 					</div>
-					<div class="form-row justify-content-between">
+					<div class="form-row">
 						<div class="form-group col-md-3">
-							<label for="startingDate">Starting Date</label>
-							<input type="date" name="start_date" class="form-control" id="startingDate" value="<?php if(isset($draft_details['start_date'])){ echo $draft_details['start_date'];} ?>" >
+							<label for="startDate">Starting Date</label>
+							<input type="date" name="start_date" class="form-control" id="startDate" value="<?php if(isset($start_date)){ echo $start_date;} ?>">
 						</div>
-
-						<div class="custom-control custom-checkbox mr-md-3">
-							<input type="checkbox" class="custom-control-input" name="onetime" id="customControlAutosizing" <?php if (isset($_GET['draft_id'])) {
-									if ($draft_details['start_date'] == $draft_details['ending_date']) {
-										echo "checked";
-									}
-							}else{echo "checked";} ?>>
-							<label class="custom-control-label" for="customControlAutosizing">One time request</label>
+						<div class="form-group col-md-3">
+							<label for="startTime">Starting Time</label>
+							<input type="time" name="start_time" class="form-control" id="startTime" value="<?php if(isset($start_time)){ echo $start_time;} ?>" >
 						</div>
-
+					</div>
+					<div class="form-row end_datetime">
 						<div class="form-group col-md-3">
 							<label for="endDate">End Date</label>
-							<input type="date" name="end_date" class="form-control" value="<?php if(isset($draft_details['ending_date'])){ if($draft_details['start_date'] != $draft_details['ending_date']) echo $draft_details['ending_date'];} ?>" id="endDate">
+							<input type="date" name="end_date" class="form-control" value="<?php if(isset($end_date)){echo $end_date;} ?>" id="endDate">
+						</div>
+						<div class="form-group col-md-3">
+							<label for="endTime">End Time</label>
+							<input type="time" name="end_time" class="form-control" value="<?php if(isset($end_time)){echo $end_time;} ?>" id="endTime">
 						</div>
 					</div>
 					<div class="form-row justify-content-between">

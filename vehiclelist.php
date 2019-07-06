@@ -3,9 +3,13 @@
 	if (!isset($_SESSION['user_id'])) {
 		header("Location: login.php");
 	}
-	include 'core/application.db.php';
-	$a = new Application($host, $db_name, $db_user, $db_pass);
-	$draft_list = $a->applicant_joint_details($_SESSION['user_id'], 'N');
+	include 'core/vehicle.db.php';
+	$v = new Vehicle($host, $db_name, $db_user, $db_pass);
+	if (isset($_GET['del'])) {
+		$v->delete($_GET['del']);
+		header("Location: vehiclelist.php");
+	}
+	$vehiclelist = $v->fetch_by_id(1, 1);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,22 +30,34 @@
 		<div class="row">
 			<div class="col col-lg-3 side_nav">
 				<?php
-					$active = "Vehicle";
+					$active = "vehiclelist";
 					require "core/side_nav.php";
 				?>
 			</div>
 			<div class="col-md-9">
 				<nav class="navbar navbar-light bg-light">
-					<a class="text-primary">Vehicle List</a>
+					<a class="navbar-brand">Vehicle List</a>
 				</nav>
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col" style="width: 10%;">Vehicle no</th>
-							<th scope="col" style="width: 20%;">Type(SubType)</th>
-							<th scope="col" style="width: 20%;">Status</th>
-							<th scope="col" style="width: 10%;">Location</th>
+							<th scope="col">Number</th>
+							<th scope="col">Type</th>
+							<th scope="col">Last Issue</th>
+							<th scope="col">Location</th>
+							<th scope="col">Operation</th>
 						</tr>
+						<tbody>
+							<?php foreach ($vehiclelist as $key => $value): ?>
+								<tr>
+									<th scope="row"><?=$value['no'];?></th>
+									<td><?=$value['type'];?> (<?=$value['subtype'];?>)</td>
+									<td><?=$value['status'];?></td>
+									<td><?=$value['location'];?></td>
+									<td><a href="vehiclelist.php?del=<?=$value['no'];?>">Delete</a></td>
+								</tr>
+							<?php endforeach ?>
+						</tbody>
 				</table>
 
 			</div>
