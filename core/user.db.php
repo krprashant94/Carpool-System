@@ -112,6 +112,21 @@
 			$data=$result->fetchAll(PDO::FETCH_ASSOC);
 			return $data;
 		}
+		public function getDriver(){
+			$query="SELECT id, CONCAT( f_name, ' ', m_name, ' ', surname) as name FROM user WHERE dl_no != '' AND department = 'Transport'";
+			$result = $this->conn->prepare($query);
+			$result->execute();
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+		public function getDepartments(){
+			$query="SELECT * FROM department";
+			$result = $this->conn->prepare($query);
+			$result->execute();
+			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+
 	}
 
 	// $u = new User($host, $db_name, $db_user, $db_pass);

@@ -4,7 +4,8 @@
 		header("Location: login.php");
 	}
 	$message = false;
-	include 'core/application.db.php';
+	include 'core/user.db.php';
+
 	if (isset($_POST['submit'])) {
 		if (empty($_POST['veichle_type'])) {
 			$message = 'Invalid vehicle type.';
@@ -22,6 +23,8 @@
 			}
 		}
 	}
+	$u = new User($host, $db_name, $db_user, $db_pass);
+	$all_driver = $u->getDriver();
 	?>
 <!DOCTYPE html>
 <html>
@@ -70,7 +73,11 @@
 						</div>
 						<div class="form-group col-md-4">
 							<label for="veichle_driver">Driver</label>
-							<input type="text" name="veichle_driver" class="form-control" id="veichle_driver" value="">
+							<select name="veichle_driver" class="form-control" id="veichle_driver" >
+								<?php foreach ($all_driver as $key => $value): ?>
+									<option value="<?=$value['id'];?>"><?=$value['name'];?></option>
+								<?php endforeach ?>
+							</select>
 						</div>
 					</div>
 

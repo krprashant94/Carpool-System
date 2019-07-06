@@ -19,6 +19,8 @@
 		}
 		public function insert($type, $subtype, $driver, $number, $location){
 			try{
+				$number = strtoupper($number);
+				$subtype = strtolower($subtype);
 				$q = $this->conn->prepare("INSERT INTO vehicle (no, type, subtype, location, driver) VALUES (?, ?, ?, ?, ?);");
 				$q->execute(array($number, $type, $subtype, $location, $driver));
 				if($q->rowCount() == 1){ return true; }

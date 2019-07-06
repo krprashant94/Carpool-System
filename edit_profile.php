@@ -7,6 +7,7 @@
 	include_once 'core/user.db.php';
 	$u = new User($host, $db_name, $db_user, $db_pass);
 	$user_details = $u->fetch_by_id('id', $_SESSION['user_id'])[0];
+	$department_list = $u->getDepartments();
 
 	$message = false;
 	$sucess = false;
@@ -177,12 +178,9 @@
 						<div class="form-group col-md-6">
 							<label for="inputDepartment">Department</label>
 							<select class="form-control" id="inputDepartment" name="department">
-								<option><?=$user_details['department'];?></option>
-								<option>Information Technology</option>
-								<option>Human Resource</option>
-								<option>Finnance</option>
-								<option>Store</option>
-								<option>Management</option>
+								<?php foreach ($department_list as $key => $value): ?>
+									<option <?php if($user_details['department'] == $value['name']) echo "selected" ?>><?=$value['name'];?></option>
+								<?php endforeach ?>
 							</select>
 						</div>
 					</div>
