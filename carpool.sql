@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 03:56 PM
+-- Generation Time: Jul 07, 2019 at 12:28 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -34,8 +34,8 @@ CREATE TABLE `applicatioin` (
   `pickup_location` varchar(100) NOT NULL,
   `application_date` varchar(20) NOT NULL,
   `department` varchar(50) NOT NULL,
-  `start_date` varchar(20) NOT NULL,
-  `ending_date` varchar(20) NOT NULL,
+  `start_date` bigint(20) NOT NULL,
+  `ending_date` bigint(20) NOT NULL,
   `vehicle_req` varchar(50) NOT NULL,
   `vehicle_issue` varchar(20) NOT NULL,
   `notification` varchar(1) NOT NULL,
@@ -51,8 +51,28 @@ CREATE TABLE `applicatioin` (
 --
 
 INSERT INTO `applicatioin` (`draft_id`, `applicant`, `receiver`, `message`, `pickup_location`, `application_date`, `department`, `start_date`, `ending_date`, `vehicle_req`, `vehicle_issue`, `notification`, `applied`, `status`, `forwarded`, `issued_by`, `log`) VALUES
-('845949OHWN', 6, 6, 'cae', 'car', '1562403410', 'CSE', '1561923000', '1562268600', 'car', 'JH05AC1234', 'Y', 'Y', 'Approved by Prashant Kumar Prasad(IT)', 6, '6', '<br>Prashant Kumar Prasad (IT) : Forwarded to Prashant Kumar Prasad with message - pa<br>Prashant Kumar Prasad (IT) : Forwarded to Prashant Kumar Prasad with message - pass<br>Prashant Kumar Prasad (IT) : Approved your request.'),
-('846040RYOM', 6, 2, '', '', '1562413410', 'HR', '0', '0', '', '', 'Y', 'N', 'Applied', 0, '', '');
+('845949OHWN', 6, 6, 'cae', 'car', '1562403410', 'CSE', 1561923000, 1562268600, 'car', 'JH05AC1234', 'Y', 'Y', '0', 6, '6', '<br>Prashant Kumar Prasad (IT) : Forwarded to Prashant Kumar Prasad with message - pa<br>Prashant Kumar Prasad (IT) : Forwarded to Prashant Kumar Prasad with message - pass<br>Prashant Kumar Prasad (IT) : Approved your request.'),
+('846040RYOM', 6, 6, 'sms', 'car', '1562431191', 'Transport', 1563521400, 1563525000, 'Bus', 'JH05AC1234', 'Y', 'Y', 'Approved by Pamela   Banerjee(Transport)', 2, '2', '<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - all ok<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - pass<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - pass<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - pass<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - s<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - s<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - ok pass<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Prashant Kumar Prasad with message - ok<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Pamela   Banerjee with message - pass checked<br>Pamela   Banerjee (Transport) : Approved your request.'),
+('865178OBEG', 2, 6, 'no description', 'main gate', '1562432556', 'Human Resource', 1561923000, 1562578140, 'Bus', 'JH05AC1234', 'Y', 'Y', '', 6, '6', '<br>Prashant Kumar Prasad (Human Resource) : Forwarded to Pamela   Banerjee with message - pass<br>Prashant Kumar Prasad (Human Resource) : Approved your request.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`name`) VALUES
+('Transport'),
+('Human Resource'),
+('Finnance');
 
 -- --------------------------------------------------------
 
@@ -90,8 +110,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `password`, `image`, `f_name`, `m_name`, `surname`, `dob`, `dl_no`, `house_no`, `address_l1`, `address_l2`, `landmark`, `pincode`, `city`, `state`, `country`, `mail_id`, `phone`, `blood_group`, `identification`, `department`, `auth_level`) VALUES
-(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '', '', '', '', '', 0, '', '', '', 'pamelabanerjee11@gmail.com', 123456789, '', '', 'HR', 5),
-(6, '5723fd42d69df94be995fe69de96dbbe0b12d1d5', '', 'Prashant', 'Kumar', 'Prasad', '', '', '', '', '', '', 832108, '', '', '', 'pkp@pkp.com', 2147483647, 'A+', '', 'IT', 5);
+(2, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '', 'Pamela ', '', 'Banerjee', '', '1', '', 'l1', 'l2', 'landmark', 0, 'jsr', 'jhar', 'india', 'pamelabanerjee11@gmail.com', 123456789, '', 'idf', 'Transport', 5),
+(6, '7c4a8d09ca3762af61e59520943dc26494f8941b', '', 'Prashant', 'Kumar', 'Prasad', '1', 'DDLJ2003', '12', 'line 1', 'line 2', 'Main road', 832108, 'Jamshedpur', 'Jharkhand', 'India', 'kr.prashant94@gmail.com', 2147483647, 'A+', 'mole mark', 'Human Resource', 5);
 
 -- --------------------------------------------------------
 
@@ -114,7 +134,7 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`no`, `type`, `subtype`, `status`, `location`, `app_id`, `driver`) VALUES
-('JH05AC1234', 'Car', 'TATA Sumo', 'Last issue to Prashant Kumar Prasad', 'Inside company', '845949OHWN', 0);
+('JH05AC1234', 'Car', 'tata sumo', 'Last issue to Prashant Kumar Prasad', 'Inside company', '0', 0);
 
 --
 -- Indexes for dumped tables
