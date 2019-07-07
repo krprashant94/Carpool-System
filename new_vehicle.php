@@ -61,10 +61,10 @@
 								<option></option>
 								<option>Auto</option>
 								<option>Bus</option>
+								<option>Van</option>
 								<option>Car</option>
 								<option>Truck</option>
-								<option>Carrier Truck</option>
-								<option>Mini Carrier</option>
+								<option>Pickup Truck</option>
 							</select>
 						</div>
 						<div class="form-group col-md-4">

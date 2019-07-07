@@ -53,10 +53,14 @@
 		require_once "core/application.db.php";
 		$a = new Application($host, $db_name, $db_user, $db_pass);
 		$draft_details = $a->fetch_by_id('draft_id', $_GET['draft_id'])[0];
-		$start_date = date('Y-m-d', $draft_details['start_date']);
-		$start_time = date('H:i', $draft_details['start_date']);
-		$end_date = date('Y-m-d', $draft_details['ending_date']);
-		$end_time = date('H:i', $draft_details['ending_date']);
+		if ($draft_details['start_date'] != 0) {
+			$start_date = date('Y-m-d', $draft_details['start_date']);
+			$start_time = date('H:i', $draft_details['start_date']);
+		}
+		if ($draft_details['ending_date']) {
+			$end_date = date('Y-m-d', $draft_details['ending_date']);
+			$end_time = date('H:i', $draft_details['ending_date']);
+		}
 
 		if ($draft_details['applied'] == 'Y') {
 			header("Location: application.php");

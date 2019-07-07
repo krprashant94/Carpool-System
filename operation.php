@@ -36,7 +36,9 @@
 		}elseif (isset($_POST['vichel_no'])) {
 		// $_POST['draft_id'] = 'OERG60476';
 		// $_POST['vichel_no'] = 'JH05AC1234';
-
+			if (empty($_POST['vichel_no'])) {
+				die("empty");
+			}
 			include_once 'core/application.db.php';
 			include_once 'core/user.db.php';
 			include_once 'core/vehicle.db.php';
@@ -49,7 +51,7 @@
 
 			$name = $u->getName($_SESSION['user_id'])[0];
 			$log =  $application_details['log'].'<br>'.$name['name']." (".$name['department'].") : Approved your request.";
-			$a->update("status", "Approved by ".$name['name']."(".$name['department'].")", $_POST['draft_id']);
+			$a->update("status", "Approved by ".$name['name']." (".$name['department'].")", $_POST['draft_id']);
 			$a->update("log", $log, $_POST['draft_id']);
 			$a->update("issued_by", $_SESSION['user_id'], $_POST['draft_id']);
 			$a->update("vehicle_issue", $_POST['vichel_no'], $_POST['draft_id']);

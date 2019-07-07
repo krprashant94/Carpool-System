@@ -13,9 +13,18 @@
 	$sucess = false;
 
 	if (isset($_POST['submit'])) {
-		if($user_details['f_name'] != $_POST['f_name']){ $u->update('f_name', $_POST['f_name'], $_SESSION['user_id']); }
-		if($user_details['m_name'] != $_POST['m_name']){ $u->update('m_name', $_POST['m_name'], $_SESSION['user_id']); }
-		if($user_details['surname'] != $_POST['surname']){ $u->update('surname', $_POST['surname'], $_SESSION['user_id']); }
+		if($user_details['f_name'] != $_POST['f_name']){
+			$u->update('f_name', $_POST['f_name'], $_SESSION['user_id']);
+			$_SESSION['name'] = $_POST['f_name'].' '.$_POST['m_name'].' '.$_POST['surname'];
+		}
+		if($user_details['m_name'] != $_POST['m_name']){
+			$u->update('m_name', $_POST['m_name'], $_SESSION['user_id']);
+			$_SESSION['name'] = $_POST['f_name'].' '.$_POST['m_name'].' '.$_POST['surname'];
+		}
+		if($user_details['surname'] != $_POST['surname']){
+			$u->update('surname', $_POST['surname'], $_SESSION['user_id']);
+			$_SESSION['name'] = $_POST['f_name'].' '.$_POST['m_name'].' '.$_POST['surname'];
+		}
 		if($user_details['phone'] != $_POST['phone']){ $u->update('phone', $_POST['phone'], $_SESSION['user_id']); }
 		if($user_details['blood_group'] != $_POST['blood_group']){ $u->update('blood_group', $_POST['blood_group'], $_SESSION['user_id']); }
 		if($user_details['house_no'] != $_POST['house_no']){ $u->update('house_no', $_POST['house_no'], $_SESSION['user_id']); }
@@ -27,7 +36,10 @@
 		if($user_details['country'] != $_POST['country']){ $u->update('country', $_POST['country'], $_SESSION['user_id']); }
 		if($user_details['landmark'] != $_POST['landmark']){ $u->update('landmark', $_POST['landmark'], $_SESSION['user_id']); }
 		if($user_details['dl_no'] != $_POST['dl_no']){ $u->update('dl_no', $_POST['dl_no'], $_SESSION['user_id']); }
-		if($user_details['department'] != $_POST['department']){ $u->update('department', $_POST['department'], $_SESSION['user_id']); }
+		if($user_details['department'] != $_POST['department']){
+			$u->update('department', $_POST['department'], $_SESSION['user_id']);
+			$_SESSION['department'] = $_POST['department'];
+		}
 		if($user_details['identification'] != $_POST['identification']){ $u->update('identification', $_POST['identification'], $_SESSION['user_id']); }
 
 		if (sha1($_POST['old_password']) == $user_details['password']) {

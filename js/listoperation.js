@@ -56,27 +56,27 @@ function forword(e) {
 	active_draft = e;
 }
 function send_form(e) {
-	console.log(e.forword_to.value + e.message.value + active_draft);
+	event.preventDefault();
+	console.log(e.fwd_name.value + " " + e.message.value + " " + active_draft);
 
-	if(!e.forword_to.value || !e.message.value || !active_draft){
+	if(!e.fwd_name.value || !e.message.value || !active_draft){
 		swal({
 			dangerMode: true,
 			title:"Unable to forword this application. Required fields are empty.",
 		});
 		return;
 	}
-
 	$.ajax({
 		type: "POST",
 		url: 'operation.php',
-		data: 'draft_id=' + active_draft + "&forword_to=" + e.forword_to.value + "&forword_msg=" + e.message.value,
+		data: 'draft_id=' + active_draft + "&forword_to=" + e.fwd_name.value + "&forword_msg=" + e.message.value,
 		dataType: 'HTML',
 		success: function (res) {
 			console.log(res);
 			if (res == 'true') {
 
 				$('.'+active_draft).hide();
-				$('#fwdModel').modal('hide')
+				$('#fwdModel').modal('hide');
 				$('.'+active_draft).hide();
 				active_draft = null;
 
@@ -94,8 +94,7 @@ function send_form(e) {
 			}
 		},
 		error: function (e, xhr, state) {
-			$('.'+active_draft).hide();
-			$('#fwdModel').modal('hide')
+			$('#fwdModel').modal('hide');
 			active_draft = null;
 
 			console.log('Error [core/listoperation.js] : ',e);
@@ -105,19 +104,45 @@ function send_form(e) {
 				text:"With status "+state+"\nView console log for more details, if you are a webmaster." ,
 				icon: "error"
 			});
+			active_draft = null;
 		}
 	});
 
 }
-function pass(e) {
-	console.log(e);
-	$("#passModel").modal('show');
+function pass(e, start, end) {
+	start = parseInt(start) - 1800;
+	end = parseInt(end) + 1800;
+	console.log(e, start, end);
+	$.ajax({
+		type: "GET",
+		url: 'ajax/vehicle_list.php',
+		data: 'start='+start+'&end='+end,
+		dataType: 'JSON',
+		success: function (res) {
+			console.log(res);
+
+			str = "";
+			for (var i = res.length - 1; i >= 0; i--) {
+				str = str + "<option value='"+res[i]['no']+"'>"+res[i]['type']+" - "+res[i]['subtype']+" - "+res[i]['no']+"</option>";
+			}
+			$(".vichelList").html(str);
+			$("#passModel").modal('show');
+		},
+		error: function (e, xhr, state) {
+			console.log('Error [core/listoperation.js] : ',e);
+			swal({
+				dangerMode: true,
+				title:"Internal server error",
+				text:"With status "+state+"\nView console log for more details, if you are a webmaster." ,
+				icon: "error"
+			});
+		}
+	});
 	active_draft = e;
 }
 
 function pass_form(e) {
 	console.log(e.vichel_no.value, active_draft);
-	$('.'+active_draft).hide();
 	$('#passModel').modal('hide');
 	$.ajax({
 		type: "POST",
@@ -125,16 +150,11 @@ function pass_form(e) {
 		data: 'draft_id=' + active_draft + "&vichel_no=" + e.vichel_no.value,
 		dataType: 'HTML',
 		success: function (res) {
-			console.log(res);
 			if (res == 'true') {
-
+				console.log('.'+active_draft);
 				$('.'+active_draft).hide();
-				$('#fwdModel').modal('hide')
-				$('.'+active_draft).hide();
-				active_draft = null;
-
 				swal({
-					title:"Application approved",
+					title:"Application approved.",
 					icon: "success"
 				});
 			}
@@ -145,12 +165,9 @@ function pass_form(e) {
 					icon: "error"
 				});
 			}
+			active_draft = null;
 		},
 		error: function (e, xhr, state) {
-			$('.'+active_draft).hide();
-			$('#fwdModel').modal('hide')
-			active_draft = null;
-
 			console.log('Error [core/listoperation.js] : ',e);
 			swal({
 				dangerMode: true,
@@ -158,9 +175,9 @@ function pass_form(e) {
 				text:"With status "+state+"\nView console log for more details, if you are a webmaster." ,
 				icon: "error"
 			});
+			active_draft = null;
 		}
 	});
-	active_draft = null;
 }
 function view(e) {
 	console.log(e);

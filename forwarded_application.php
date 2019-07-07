@@ -6,7 +6,7 @@
 
 	include 'core/application.db.php';
 	$a = new Application($host, $db_name, $db_user, $db_pass);
-	$draft_list = $a->applicatioin_joint_details_fwd($_SESSION['user_id']);
+	$draft_list = $a->application_joint_details_fwd($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,7 +61,7 @@
 							</td>
 							<td>
 								<center>
-									<img onclick="pass('<?=$value['draft_id'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
+									<img onclick="pass('<?=$value['draft_id'];?>', '<?=$value['start_date'];?>', '<?=$value['ending_date'];?>')" src="images/accept.png" title="Accept this application and issue a vehicle." width="20px"> | 
 									<img onclick="forword('<?=$value['draft_id'];?>')" src="images/send.png" title="Forword to higher authority." width="20px"> | 
 									<img onclick="reject('<?=$value['draft_id'];?>')" src="images/reject.png" title="Reject this application" width="20px"> | 
 									<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this application" width="20px">
@@ -69,20 +69,8 @@
 							</td>
 						</tr>
 						<?php endforeach ?>
-
-
-
-
-
 					</tbody>
 				</table>
-
-
-
-
-
-
-
 
 			</div>
 		</div>

@@ -49,11 +49,21 @@
 				echo "Error";
 			}
 		}
-		public function getAvailable(){
-			$query="SELECT * FROM vehicle WHERE 1";
-			$result = $this->conn->prepare($query);
-			$result->execute();
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
+		public function getAvailable($start_timestamp, $end_timestamp){
+			$q = "SELECT COUNT(DISTINCT(no)) FROM application LEFT JOIN vehicle on application.vehicle_issue = vehicle.no WHERE ((start_date BETWEEN ? AND ?) OR (ending_date BETWEEN ? AND ?)) AND application.vehicle_issue != '';";
+			$query = $this->conn->prepare($q);
+			$query->execute(array($start_timestamp, $end_timestamp, $start_timestamp, $end_timestamp));
+			if ($query->fetchColumn() == 0) {
+				$q = "SELECT no, type, subtype FROM vehicle";
+				$query = $this->conn->prepare($q);
+				$query->execute();
+			}else{
+				$q = "SELECT no, type, subtype FROM vehicle WHERE vehicle.no NOT IN (SELECT DISTINCT(no) FROM application LEFT JOIN vehicle on application.vehicle_issue = vehicle.no WHERE ((start_date BETWEEN ? AND ?) OR (ending_date BETWEEN ? AND ?)) AND application.vehicle_issue != '')";
+				$query = $this->conn->prepare($q);
+				$query->execute(array($start_timestamp, $end_timestamp, $start_timestamp, $end_timestamp));
+			}
+
+			$data=$query->fetchAll(PDO::FETCH_ASSOC);
 			return $data;
 		}
 		function fetch_by_id($where, $id){

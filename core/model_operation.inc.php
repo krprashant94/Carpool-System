@@ -1,11 +1,7 @@
 <?php
 	require_once "core/user.db.php";
-	require_once "core/vehicle.db.php";
 	$u = new User($host, $db_name, $db_user, $db_pass);
-	$v = new Vehicle($host, $db_name, $db_user, $db_pass);
-
 	$admin_list = $u->getAdmins($_SESSION['auth_level']);
-	$vehicle = $v->getAvailable();
 ?>
 <form>
 	<div class="modal fade" id="fwdModel" tabindex="-1" role="dialog" aria-labelledby="fwdModelLabel" aria-hidden="true">
@@ -78,10 +74,8 @@
 					<div class="form-group row">
 						<label for="vichelNum" class="col-sm-5 col-form-label">Vichel Number</label>
 						<div class="col-sm-7">
-							<select name="vichel_no" class="form-control" id="vichelNum">
-								<?php foreach ($vehicle as $key => $value): ?>
-									<option value="<?=$value['no'];?>"><?=$value['type'];?> - <?=$value['subtype'];?> - <?=$value['no'];?></option>
-								<?php endforeach ?>
+							<select name="vichel_no" class="form-control vichelList" id="vichelNum">
+								
 							</select>
 						</div>
 					</div>
