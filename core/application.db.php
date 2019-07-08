@@ -32,7 +32,10 @@
 				if($q->rowCount() == 1){ return $draft; }
 				return false;
 			}catch(PDOException $e){
-				echo $e->getMessage();
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
 			}
 		}
 		public function delete($applicant){
@@ -42,7 +45,10 @@
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo $e->getMessage();
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
 			}
 		}
 		public function update($column, $new_val, $primery){
@@ -52,46 +58,84 @@
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo $e->getMessage();
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
 			}
 		}
 
 		function fetch_by_id($where, $id){
-			$query="SELECT * FROM application WHERE (".$where."=?)";
-			$result = $this->conn->prepare($query);
-			$result->execute(array($id));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT * FROM application WHERE (".$where."=?)";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 
 		function fetch_by_two_id($where1, $id1, $where2, $id2){
-			$query="SELECT * FROM application WHERE (".$where1."=?) AND (".$where2."=?) ";  
-			$result = $this->conn->prepare($query);
-			$result->execute(array($id1, $id2));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
-			
+			try{
+				$query="SELECT * FROM application WHERE (".$where1."=?) AND (".$where2."=?) ";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id1, $id2));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 		function application_joint_details($user, $applied='Y', $fwd=0){
-			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, application.draft_id, application.message, application.pickup_location, application.application_date, application.start_date, application.ending_date, application.vehicle_req, application.vehicle_issue, application.notification, application.applied, application.issued_by, application.log FROM application LEFT JOIN user on user.id = application.applicant WHERE applied = ? AND application.receiver = ? AND application.forwarded = ? AND application.status NOT LIKE 'Approved%' AND application.status NOT LIKE 'Rejected%';";  
-			$result = $this->conn->prepare($query);
-			$result->execute(array($applied, $user, $fwd));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, application.draft_id, application.message, application.pickup_location, application.application_date, application.start_date, application.ending_date, application.vehicle_req, application.vehicle_issue, application.notification, application.applied, application.issued_by, application.log FROM application LEFT JOIN user on user.id = application.applicant WHERE applied = ? AND application.receiver = ? AND application.forwarded = ? AND application.status NOT LIKE 'Approved%' AND application.status NOT LIKE 'Rejected%';";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($applied, $user, $fwd));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 		function application_joint_details_fwd($user){
-			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, application.draft_id, application.message, application.pickup_location, application.application_date, application.start_date, application.ending_date, application.vehicle_req, application.vehicle_issue, application.notification, application.applied, application.issued_by, application.log FROM application LEFT JOIN user on user.id = application.applicant WHERE applied = 'Y' AND application.forwarded = ? AND application.status NOT LIKE 'Approved%' AND application.status NOT LIKE 'Rejected%';";  
-			$result = $this->conn->prepare($query);
-			$result->execute(array($user));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, application.draft_id, application.message, application.pickup_location, application.application_date, application.start_date, application.ending_date, application.vehicle_req, application.vehicle_issue, application.notification, application.applied, application.issued_by, application.log FROM application LEFT JOIN user on user.id = application.applicant WHERE applied = 'Y' AND application.forwarded = ? AND application.status NOT LIKE 'Approved%' AND application.status NOT LIKE 'Rejected%';";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($user));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 		function applicant_joint_details($user, $applied='Y'){
-			$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, application.draft_id, application.message, application.pickup_location, application.application_date, application.start_date, application.ending_date, application.vehicle_req, application.vehicle_issue, application.notification, application.applied, application.issued_by, application.log, application.forwarded, application.status FROM application LEFT JOIN user on user.id = application.applicant WHERE applied = ? AND application.applicant = ?;";  
-			$result = $this->conn->prepare($query);
-			$result->execute(array($applied, $user));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT user.f_name, user.m_name, user.surname, user.mail_id, user.phone, user.department, application.draft_id, application.message, application.pickup_location, application.application_date, application.start_date, application.ending_date, application.vehicle_req, application.vehicle_issue, application.notification, application.applied, application.issued_by, application.log, application.forwarded, application.status FROM application LEFT JOIN user on user.id = application.applicant WHERE applied = ? AND application.applicant = ?;";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($applied, $user));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 	}
 

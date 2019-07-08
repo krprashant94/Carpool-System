@@ -1,6 +1,14 @@
 <?php 
 	include 'core/core.inc.php';
 	if (!isset($_SESSION['user_id'])) { header("Location: login.php"); }
+
+	include_once 'core/user.db.php';
+	include 'core/application.db.php';
+	$u = new User($host, $db_name, $db_user, $db_pass);
+	$a = new Application($host, $db_name, $db_user, $db_pass);
+
+	
+
 ?>
 <!DOCTYPE html>
 <html>

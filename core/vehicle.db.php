@@ -26,7 +26,10 @@
 				if($q->rowCount() == 1){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo false;
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				return false;
 			}
 		}
 		public function delete($num){
@@ -36,7 +39,10 @@
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				return false;
 			}
 		}
 		public function update($column, $new_val, $primery){
@@ -46,40 +52,64 @@
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				return false;
 			}
 		}
 		public function getAvailable($start_timestamp, $end_timestamp){
-			$q = "SELECT COUNT(DISTINCT(no)) FROM application LEFT JOIN vehicle on application.vehicle_issue = vehicle.no WHERE ((start_date BETWEEN ? AND ?) OR (ending_date BETWEEN ? AND ?)) AND application.vehicle_issue != '';";
-			$query = $this->conn->prepare($q);
-			$query->execute(array($start_timestamp, $end_timestamp, $start_timestamp, $end_timestamp));
-			if ($query->fetchColumn() == 0) {
-				$q = "SELECT no, type, subtype FROM vehicle";
-				$query = $this->conn->prepare($q);
-				$query->execute();
-			}else{
-				$q = "SELECT no, type, subtype FROM vehicle WHERE vehicle.no NOT IN (SELECT DISTINCT(no) FROM application LEFT JOIN vehicle on application.vehicle_issue = vehicle.no WHERE ((start_date BETWEEN ? AND ?) OR (ending_date BETWEEN ? AND ?)) AND application.vehicle_issue != '')";
+			try{
+				$q = "SELECT COUNT(DISTINCT(no)) FROM application LEFT JOIN vehicle on application.vehicle_issue = vehicle.no WHERE ((start_date BETWEEN ? AND ?) OR (ending_date BETWEEN ? AND ?)) AND application.vehicle_issue != '';";
 				$query = $this->conn->prepare($q);
 				$query->execute(array($start_timestamp, $end_timestamp, $start_timestamp, $end_timestamp));
-			}
+				if ($query->fetchColumn() == 0) {
+					$q = "SELECT no, type, subtype FROM vehicle";
+					$query = $this->conn->prepare($q);
+					$query->execute();
+				}else{
+					$q = "SELECT no, type, subtype FROM vehicle WHERE vehicle.no NOT IN (SELECT DISTINCT(no) FROM application LEFT JOIN vehicle on application.vehicle_issue = vehicle.no WHERE ((start_date BETWEEN ? AND ?) OR (ending_date BETWEEN ? AND ?)) AND application.vehicle_issue != '')";
+					$query = $this->conn->prepare($q);
+					$query->execute(array($start_timestamp, $end_timestamp, $start_timestamp, $end_timestamp));
+				}
 
-			$data=$query->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+				$data=$query->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 		function fetch_by_id($where, $id){
-			$query="SELECT * FROM vehicle WHERE ".$where."=?";
-			$result = $this->conn->prepare($query);
-			$result->execute(array($id));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT * FROM vehicle WHERE ".$where."=?";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 
 		function fetch_by_two_id($where1, $id1, $where2, $id2){
-			$query="SELECT * FROM vehicle WHERE (".$where1."=?) AND (".$where2."=?) ";  
-			$result = $this->conn->prepare($query);
-			$result->execute(array($id1, $id2));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT * FROM vehicle WHERE (".$where1."=?) AND (".$where2."=?) ";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id1, $id2));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 	}
 

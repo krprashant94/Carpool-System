@@ -55,7 +55,10 @@
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die("Error...");
 			}
 		}
 		public function update($column, $new_val, $primery){
@@ -65,25 +68,41 @@
 				if($q->rowCount() != 0){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die("Error...");
 			}
 		}
 
 		function fetch_by_id($where, $id){
-			$query="SELECT * FROM user WHERE (".$where."=?)";
-			$result = $this->conn->prepare($query);
-			$result->execute(array($id));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT * FROM user WHERE (".$where."=?)";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 
 		function fetch_by_two_id($where1, $id1, $where2, $id2){
-			$query="SELECT * FROM user WHERE (".$where1."=?) AND (".$where2."=?) ";  
-			$result = $this->conn->prepare($query);
-			$result->execute(array($id1, $id2));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
-			
+			try{
+				$query="SELECT * FROM user WHERE (".$where1."=?) AND (".$where2."=?) ";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id1, $id2));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 
 		function search_by_name($keyword){
@@ -106,25 +125,46 @@
 			
 		}
 		public function getAdmins($auth_level){
-			$query="SELECT id, CONCAT( f_name, ' ', m_name, ' ', surname) as name, department FROM user WHERE auth_level >= ? AND auth_level != 0";
-			$result = $this->conn->prepare($query);
-			$result->execute(array($auth_level));
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT id, CONCAT( f_name, ' ', m_name, ' ', surname) as name, department FROM user WHERE auth_level >= ? AND auth_level != 0";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($auth_level));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 		public function getDriver(){
-			$query="SELECT id, CONCAT( f_name, ' ', m_name, ' ', surname) as name FROM user WHERE dl_no != '' AND department = 'Transport'";
-			$result = $this->conn->prepare($query);
-			$result->execute();
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT id, CONCAT( f_name, ' ', m_name, ' ', surname) as name FROM user WHERE dl_no != '' AND department = 'Transport'";
+				$result = $this->conn->prepare($query);
+				$result->execute();
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 		public function getDepartments(){
-			$query="SELECT * FROM department";
-			$result = $this->conn->prepare($query);
-			$result->execute();
-			$data=$result->fetchAll(PDO::FETCH_ASSOC);
-			return $data;
+			try{
+				$query="SELECT * FROM department";
+				$result = $this->conn->prepare($query);
+				$result->execute();
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
 		}
 
 	}
