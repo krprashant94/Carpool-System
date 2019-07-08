@@ -88,4 +88,15 @@
 			$a->delete($_POST['draft_id']);
 			echo "true";
 		}
+	}elseif (isset($_POST['user_id'])) {
+		if (!empty($_POST['user_id']) && $_POST['user_id'] != $_SESSION['user_id']) {
+			if (isset($_POST['auth_level'])) {
+				if ($_POST['auth_level'] < $_SESSION['auth_level']) {
+					include_once 'core/user.db.php';
+					$u = new User($host, $db_name, $db_user, $db_pass);
+					echo $u->update('auth_level', $_POST['auth_level'], $_POST['user_id']);
+					echo "true";
+				}
+			}
+		}
 	}

@@ -1,18 +1,28 @@
 <?php 
 	include 'core/core.inc.php';
-	if (isset($_POST['mail_id']) & isset($_POST['phone'])) {
-		if (!empty($_POST['mail_id'])) {
-			$msg = "First line of text\nSecond line of text";
-			$msg = wordwrap($msg,70);
-			mail("pamelabanerjee11@gmail.com","Reset Password :: TATA Sponge",$msg);
-	 		header("Location: index.php");
-		}elseif (!empty($_POST['phone'])) {
-		 	include 'core/user.db.php';
-			$u = new User($host, $db_name, $db_user, $db_pass);
-			print_r($u->random());
 
-			// $u->update("req_date", "3", "8");
-			// print_r($u->fetch_by_two_id("mail_id", "c066d45b7bb9b6baf10d6627a", "password", "kr.prashant94@gmail.com"));
+	if (isset($_POST['mail_id']) && isset($_POST['phone'])) {
+		include_once 'core/user.db.php';
+		$u = new User($host, $db_name, $db_user, $db_pass);
+		$reset_pass = $u->random(6);
+
+		$msg = "Your new password is : ".$reset_pass;
+		$subject = "Reset Password :: TATA Sponge";
+
+		if (!empty($_POST['mail_id'])) {
+
+			$recovery_details = $u->fetch_by_id('mail_id', $_POST['mail_id'])[0];
+			mail($_POST['mail_id'], $subject, $msg);
+			$u->update('password', sha1($reset_pass), $recovery_details['id']);
+
+	 		header("Location: index.php");
+
+		}elseif (!empty($_POST['phone'])) {
+			$recovery_details = $u->fetch_by_id('phone', $_POST['phone'])[0];
+			mail($recovery_details['mail_id'], $subject, $msg);
+			$u->update('password', sha1($reset_pass), $recovery_details['id']);
+
+	 		header("Location: index.php");
 		}
 	}
 ?>
@@ -44,7 +54,7 @@
 							<form method="POST">
 								<div class="form-group"s>
 									<label for="exampleInputemailid">Email-ID</label>
-									<input type="email" name="mailid" class="form-control" id="exampleInputEmailid" placeholder="example@domain.com">
+									<input type="email" name="mail_id" class="form-control" id="exampleInputEmailid" placeholder="example@domain.com">
 								</div>
 								<center><b>OR</b></center>
 								<div class="form-group">

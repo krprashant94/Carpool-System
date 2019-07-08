@@ -23,6 +23,8 @@
 	<?php endif ?>
 	<?php if ($_SESSION['auth_level'] > 2): ?>
 		<a href="new_vehicle.php"><li class="list-group-item list_itm <?php if($active == 'vehicle') echo "active_side_nav"; ?>">New Vehicle</li></a>
+	<?php endif ?>
+	<?php if ($_SESSION['auth_level'] > 1): ?>
 		<a href="userlist.php"><li class="list-group-item list_itm <?php if($active == 'userlist') echo "active_side_nav"; ?>">Employee</li></a>
 	<?php endif ?>
 	<a href="draftlist.php"><li class="list-group-item list_itm <?php if($active == 'draft') echo "active_side_nav"; ?>">Draft</li></a>

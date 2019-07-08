@@ -3,15 +3,15 @@
 	if (!isset($_SESSION['user_id'])) {
 		header("Location: login.php");
 	}
-	include 'core/application.db.php';
-	$a = new Application($host, $db_name, $db_user, $db_pass);
-	$draft_list = $a->applicant_joint_details($_SESSION['user_id']);
+	include 'core/user.db.php';
+	$u = new User($host, $db_name, $db_user, $db_pass);
+	$user_list = $u->fetch_by_id('department', $_SESSION['department']);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Dashboard</title>
-	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: History"/>
+	<meta name="og:title" property="og:title" content="TATA Sponge Limited :: User list"/>
 	<?php
 		include 'core/meta.php';
 	?>
@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col col-lg-3 side_nav">
 				<?php
-					$active = "history";
+					$active = "userlist";
 					require "core/side_nav.php";
 				?>
 			</div>
@@ -44,12 +44,14 @@
 						</tr>
 					</thead>
 					<tbody  class="applicatio_list">
-						<tr>
-							<td>Name <small>mailid@gmail.com</small></td>
-							<td>Phone</td>
-							<td><img src="images/user.png" width="32px"></td>
-							<td><button class="btn btn-link" onclick="showPromote(10)">Promote</button></td>
-						</tr>
+						<?php foreach ($user_list as $key => $value): ?>
+							<tr>
+								<td><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> <small style="color: #5abdff;"><a href="mailto:<?=$value['mail_id'];?>"><?=$value['mail_id'];?></a></small></td>
+								<td><a href="tel:<?=$value['phone'];?>"><?=$value['phone'];?></a></td>
+								<td><img src="images/userdata/user_<?=$value['id'];?>_32.png" width="32px"></td>
+								<td><button class="btn btn-link" onclick="showPromote(<?=$value['id'];?>)">Promote</button></td>
+							</tr>
+						<?php endforeach ?>
 
 					</tbody>
 				</table>
@@ -77,18 +79,18 @@
 						<div class="form-group row">
 							<label for="post" class="col-sm-5 col-form-label">Designation</label>
 							<div class="col-sm-7">
-								<select name="vichel_no" class="form-control vichelList" id="post">
-									<option value="1"></option>
-									<option value="2"></option>
-									<option value="3"></option>
-									<option value="4"></option>
+								<select name="post" class="form-control vichelList" id="post">
+									<option value="1">Leval 1 : Department Head</option>
+									<option value="2">Leval 2 : Department Head</option>
+									<option value="3">Leval 3 : Department Head</option>
+									<option value="4">Leval 4 : Plant Head</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-success" onclick="pass_form(this.form)">Approve</button>
+						<button type="button" class="btn btn-success" onclick="promote(this.form)">Approve</button>
 					</div>
 				</div>
 			</div>
@@ -112,12 +114,52 @@
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 
 <script type="text/javascript">
+	var active_user = null;
 	$(document).ready( function () {
 		$('#list_table').DataTable();
 	} );
 	function showPromote(user_id) {
 		console.log(user_id);
 		$("#promoteModel").modal('show');
+		active_user = user_id;
+	}
+	function promote(e) {
+		console.log(active_user + " " + e.post.value);
+
+
+		$.ajax({
+				type: "POST",
+				url: 'operation.php',
+				data: 'user_id='+active_user+"&auth_level="+e.post.value,
+				dataType: 'HTML',
+				success: function (res) {
+					console.log(res);
+					if (res == 'true') {
+
+						active_user = null;
+						$("#promoteModel").modal('hide');
+					}
+					else{
+						swal({
+							dangerMode: true,
+							text:"Unable to promote user. Make sure for the folowing \n 1. You are promoting your junior\n 2. Not promoting to your position\n3. Not promoting yourself",
+							icon: "error"
+						});
+					}
+				},
+				error: function (e, xhr, state) {
+					console.log('Error [core/userlist.php] : ',e);
+					swal({
+						dangerMode: true,
+						title:"Internal server error",
+						text:"With status "+state+"\nView console log for more details, if you are a webmaster." ,
+						icon: "error"
+					});
+				}
+			});
+
+
+
 	}
 </script>
 </html>
