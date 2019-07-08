@@ -42,9 +42,9 @@
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col" style="width: 10%;">Draft no</th>
+							<th scope="col">Draft no</th>
 							<th scope="col">Details</th>
-							<th scope="col" style="width: 10%;">Operation</th>
+							<th scope="col">Operation</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -37,10 +37,10 @@
 				<table class="table table-striped table-hover" id="list_table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col" style="width: 10%;">Serial no</th>
+							<th scope="col">Serial no</th>
 							<th scope="col">Description</th>
 							<th scope="col">Status</th>
-							<th scope="col" style="width: 20%;">Operation</th>
+							<th scope="col">Operation</th>
 						</tr>
 					</thead>
 					<tbody  class="applicatio_list">

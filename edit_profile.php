@@ -42,7 +42,7 @@
 		}
 		if($user_details['identification'] != $_POST['identification']){ $u->update('identification', $_POST['identification'], $_SESSION['user_id']); }
 
-		if (sha1($_POST['old_password']) == $user_details['password']) {
+		if (sha1($_POST['pass_old_xjlok']) == $user_details['password']) {
 			if (strlen($_POST['new_password']) > 5 ) {
 				if ($_POST['new_password'] == $_POST['confirm_password']) {
 					$u->update('password', sha1($_POST['confirm_password']), $_SESSION['user_id']);
@@ -129,12 +129,12 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label for="old_password">Old Password</label>
-							<input type="password" class="form-control" id="old_password" name="old_password" autocomplete="new-password">
+							<label for="pass_old_xjlok">Old Password</label>
+							<input type="password" class="form-control" id="pass_old_xjlok" name="pass_old_xjlok" autocomplete="new-password">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="new_password">New Password</label>
-						<input type="password" class="form-control" onchange="validateNewPassword(this)" id="new_password" name="new_password" autocomplete="new-password">
+						<input type="password" class="form-control" id="new_password" name="new_password" autocomplete="new-password">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="confirm_password">Confirm Password</label>
@@ -143,11 +143,11 @@
 					</div>
 					<div class="form-group">
 						<label for="inputAddress">House No</label>
-						<input type="text" class="form-control" onchange="validateHouseNo(this)" id="inputAddress" name="house_no" value="<?=$user_details['house_no'];?>">
+						<input type="text" class="form-control" id="inputAddress" name="house_no" value="<?=$user_details['house_no'];?>">
 					</div>
 					<div class="form-group">
 					  <label for="inputAddress2">Line 1</label>
-						<input type="text" class="form-control" onchange="validateLine1(this)" id="inputAddress2" name="address_l1" value="<?=$user_details['address_l1'];?>">
+						<input type="text" class="form-control" id="inputAddress2" name="address_l1" value="<?=$user_details['address_l1'];?>">
 				</div>
 					<div class="form-group">
 						<label for="inputAddress3">Line 2</label>

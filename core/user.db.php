@@ -58,7 +58,7 @@
 				if ($e->getCode() == '42S02') {
 					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
 				}
-				die("Error...");
+				die($e->getMessage());
 			}
 		}
 		public function update($column, $new_val, $primery){
@@ -70,8 +70,10 @@
 			}catch(PDOException $e){
 				if ($e->getCode() == '42S02') {
 					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}elseif ($e->getCode() == '23000') {
+					return false;
 				}
-				die("Error...");
+				die($e->getMessage());
 			}
 		}
 
