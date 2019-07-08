@@ -20,3 +20,6 @@
 	height: 20px;
 	margin: 10px;
 }
+.checkbox_column .active{
+	background: #5ABDFF;
+}

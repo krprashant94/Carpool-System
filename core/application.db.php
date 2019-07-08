@@ -80,6 +80,21 @@
 			}
 		}
 
+		function getApplicationMatrix($id){
+			try{
+				$query="SELECT application_date, start_date, ending_date FROM application WHERE applicant = ?";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id));
+				$data = $result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
+		}
+
 		function fetch_by_two_id($where1, $id1, $where2, $id2){
 			try{
 				$query="SELECT * FROM application WHERE (".$where1."=?) AND (".$where2."=?) ";  

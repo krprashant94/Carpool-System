@@ -91,6 +91,34 @@
 				die();
 			}
 		}
+		function totalCarPoolCount($id){
+			try{
+				$query="SELECT COUNT(*) FROM application WHERE applicant = ? AND status LIKE  'Approved%'";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id));
+				$data=$result->fetchColumn();
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
+		}
+		function totalCarPoolTime($id){
+			try{
+				$query="SELECT SUM(ending_date-start_date) as total_time FROM application WHERE applicant = ? AND status LIKE 'Approved%'";
+				$result = $this->conn->prepare($query);
+				$result->execute(array($id));
+				$data=$result->fetchColumn();
+				return $data;
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
+		}
 
 		function fetch_by_two_id($where1, $id1, $where2, $id2){
 			try{

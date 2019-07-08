@@ -69,7 +69,7 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="promoteModelLabel">Approve this application</h5>
+						<h5 class="modal-title" id="promoteModelLabel">Authentication Promotion</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -106,9 +106,7 @@
 
 
 </body>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/swal.js"></script>
+<?php include_once 'core/basic_java.inc.php'; ?>
 
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>

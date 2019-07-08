@@ -65,11 +65,7 @@
 	</div>
 
 </body>
-
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/swal.js"></script>
-
+<?php include_once 'core/basic_java.inc.php'; ?>
 
 <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>

@@ -6,9 +6,6 @@
 	include 'core/application.db.php';
 	$u = new User($host, $db_name, $db_user, $db_pass);
 	$a = new Application($host, $db_name, $db_user, $db_pass);
-
-	
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +38,7 @@
 						<div class="card poolcard">
 							<img class="card-img-top" src="images/car.png" alt="Card image cap">
 							<div class="card-body">
-								<center><h5 class="card-title">50 car pools</h5></center>
+								<center><h5 class="card-title"><?=$u->totalCarPoolCount($_SESSION['user_id']);?> Carpools</h5></center>
 							</div>
 						</div>
 					</div>
@@ -49,7 +46,7 @@
 						<div class="card poolcard">
 							<img class="card-img-top" src="images/distance.png" alt="Card image cap">
 							<div class="card-body">
-								<center><h5 class="card-title">5000 Km </h5></center>
+								<center><h5 class="card-title"><?=floor($u->totalCarPoolTime($_SESSION['user_id']) * 0.012);?>+ Kilometres </h5></center>
 							</div>
 						</div>
 					</div>
@@ -57,17 +54,20 @@
 						<div class="card poolcard">
 							<img class="card-img-top" src="images/pin.png" alt="Card image cap">
 							<div class="card-body">
-								<center><h5 class="card-title">5 location</h5></center>
+								<center><h5 class="card-title"><?=floor($u->totalCarPoolTime($_SESSION['user_id'])/3600);?>+ Hours</h5></center>
 							</div>
 						</div>
 					</div>
 				</div>
 				<br><br>
 				<div>
-					<center><?php include "calender.php" ?></center>
+					<center><?php include "calender.inc.php" ?></center>
 				</div>
 			</div>
 		</div>
 	</div>
 
 </body>
+<?php include_once 'core/basic_java.inc.php'; ?>
+</html>
+

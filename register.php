@@ -135,9 +135,8 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/swal.js"></script>
+<?php include_once 'core/basic_java.inc.php'; ?>
+
 <script type="text/javascript">
 	$('.loginform').animate({opacity:0},0);
 	$('.loginform').animate({opacity:1},1000);

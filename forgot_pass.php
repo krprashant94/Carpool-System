@@ -72,9 +72,8 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/swal.js"></script>
+<?php include_once 'core/basic_java.inc.php'; ?>
+
 <script type="text/javascript">
 	$('.loginform').hide();
 	$('.loginform').fadeIn(1000);

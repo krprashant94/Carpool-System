@@ -9,7 +9,6 @@
 
 <nav class="navbar navbar-dark bg-info" style="background-image: linear-gradient(-45deg, #6078EA, #17EAD9);">
 	<img src="images/tata_composit_logo.png">
- 	<!-- <a class="navbar-brand" href="#">TATA Sponge</a> -->
 	<span style="color: white;">Experss Install</span>
 </nav>
 	<br>
@@ -81,8 +80,7 @@
 	</div>
 
 </body>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/swal.js"></script>
+<?php include_once 'core/basic_java.inc.php'; ?>
 <script type="text/javascript">
 	var valid_email = false, valid_pass = false, valid_host = true, valid_location = true, valid_db_name = true,valid_username = false, valid_password = true, valid_conn = false;
 	$("#ipemail").change(function(){
