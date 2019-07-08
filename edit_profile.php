@@ -134,7 +134,7 @@
 						</div>
 						<div class="form-group col-md-4">
 							<label for="new_password">New Password</label>
-						<input type="password" class="form-control" onchange="validateNewPassword(this)" id="new_password" name="new_password" autocomplete="new-password">
+						<input type="password" class="form-control" id="new_password" name="new_password" autocomplete="new-password">
 						</div>
 						<div class="form-group col-md-4">
 							<label for="confirm_password">Confirm Password</label>
@@ -143,11 +143,11 @@
 					</div>
 					<div class="form-group">
 						<label for="inputAddress">House No</label>
-						<input type="text" class="form-control" onchange="validateHouseNo(this)" id="inputAddress" name="house_no" value="<?=$user_details['house_no'];?>">
+						<input type="text" class="form-control" id="inputAddress" name="house_no" value="<?=$user_details['house_no'];?>">
 					</div>
 					<div class="form-group">
 					  <label for="inputAddress2">Line 1</label>
-						<input type="text" class="form-control" onchange="validateLine1(this)" id="inputAddress2" name="address_l1" value="<?=$user_details['address_l1'];?>">
+						<input type="text" class="form-control" id="inputAddress2" name="address_l1" value="<?=$user_details['address_l1'];?>">
 				</div>
 					<div class="form-group">
 						<label for="inputAddress3">Line 2</label>
