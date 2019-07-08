@@ -57,9 +57,9 @@ function forword(e) {
 }
 function send_form(e) {
 	event.preventDefault();
-	console.log(e.fwd_name.value + " " + e.message.value + " " + active_draft);
+	console.log(e.forword_to.value + " " + e.message.value + " " + active_draft);
 
-	if(!e.fwd_name.value || !e.message.value || !active_draft){
+	if(!e.forword_to.value || !e.message.value || !active_draft){
 		swal({
 			dangerMode: true,
 			title:"Unable to forword this application. Required fields are empty.",
@@ -69,7 +69,7 @@ function send_form(e) {
 	$.ajax({
 		type: "POST",
 		url: 'operation.php',
-		data: 'draft_id=' + active_draft + "&forword_to=" + e.fwd_name.value + "&forword_msg=" + e.message.value,
+		data: 'draft_id=' + active_draft + "&forword_to=" + e.forword_to.value + "&forword_msg=" + e.message.value,
 		dataType: 'HTML',
 		success: function (res) {
 			console.log(res);
