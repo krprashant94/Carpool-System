@@ -28,7 +28,17 @@
 		}elseif ($_POST['blood_group'] == "Choose...") {
 			$reg_message = "Blood Group is not valid";
 		}else{
-			$u->insert($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['department'], $_POST['new_password'], $_POST['city'], $_POST['pin_code'], $_POST['blood_group']);
+			if($u->insert($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['department'], $_POST['new_password'], $_POST['city'], $_POST['pin_code'], $_POST['blood_group'])){
+
+				$details1 = $u->fetch_by_two_id("mail_id", $_POST['email'], "password", sha1($_POST['new_password']));
+
+				$_SESSION['user_id'] = $details1[0]['id'];
+				$_SESSION['auth_level'] = $details1[0]['auth_level'];
+				$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
+				$_SESSION['department'] = $details1[0]['department'];
+
+				header("Location: index.php");
+			}
 		}
 	}
 ?>
