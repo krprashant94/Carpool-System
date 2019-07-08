@@ -38,7 +38,7 @@
 				if($q->rowCount() == 1){ return true; }
 				return false;
 			}catch(PDOException $e){
-				echo "Error";
+				echo $e->getMessage();
 			}
 		}
 		public function getName($id){

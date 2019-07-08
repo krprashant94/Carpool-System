@@ -1,7 +1,11 @@
 <?php 
 	include 'core/core.inc.php';
 	if (isset($_SESSION['user_id'])) { header("Location: dashboard.php");  }
+
+	require 'core/user.db.php';
+	$u = new User($host, $db_name, $db_user, $db_pass);
 	$reg_message = false;
+	$department_list = $u->getDepartments();
 	if (isset($_POST['register'])) {
 		if(empty($_POST['name'])){
 			$reg_message = "Your name is empty";
@@ -24,11 +28,7 @@
 		}elseif ($_POST['blood_group'] == "Choose...") {
 			$reg_message = "Blood Group is not valid";
 		}else{
-			require 'core/user.db.php';
-			$u = new User($host, $db_name, $db_user, $db_pass);
 			$u->insert($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['department'], $_POST['new_password'], $_POST['city'], $_POST['pin_code'], $_POST['blood_group']);
-
-
 		}
 	}
 ?>
@@ -72,17 +72,11 @@
 								</div>
 								<div class="form-group">
 									<label for="bgroup">Department</label>
-		     						<select id="inputState" class="form-control" name="department">
-		     							<?php
-		     								if (!empty($_POST['department'])) {echo '<option selected>'.$_POST['department'].'</option>';}
-		     								else{echo "<option selected>Choose...</option>";}
-		     							?>
-			        					<option>Information Technology</option>
-			        					<option>Accounts</option>
-			        					<option>Management</option>
-			        					<option>Enviroment</option>
-			        					<option>Other</option>
-		      						</select>
+		      						<select class="form-control" id="inputDepartment" name="department">
+										<?php foreach ($department_list as $key => $value): ?>
+											<option><?=$value['name'];?></option>
+										<?php endforeach ?>
+									</select>
 								</div>
 								<div class="form-group">
 									<label for="exampleInputNPassword">Password</label>
