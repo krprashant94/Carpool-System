@@ -18,12 +18,11 @@
 					<div class="form-group row">
 						<label for="inputEmail3" class="col-sm-3 col-form-label">Forword To</label>
 						<div class="col-sm-9">
-							<select name="fwd_name" class="form-control" id="vichelNum">
+							<select name="forword_to" class="form-control" id="vichelNum">
 								<?php foreach ($admin_list as $key => $value): ?>
 									<option value="<?=$value['id']?>"><?=$value['name']?> (<?=$value['department']?>)</option>
 								<?php endforeach ?>
 							</select>
-							<input type="hidden" name="forword_to" value="6">
 						</div>
 					</div>
 					<div class="form-group row">
