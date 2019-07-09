@@ -50,7 +50,7 @@
 					</thead>
 					<tbody  class="applicatio_list">
 						<?php foreach ($user_list as $key => $value): ?>
-							<?php if ($value['id'] != $_SESSION['user_id']): ?>								
+							<?php if ($value['id'] != $_SESSION['user_id'] && $value['auth_level'] < $_SESSION['auth_level']): ?>								
 								<tr>
 									<?php
 										$user_profile_pic = "images/userdata/user_".$value['id']."_32.jpg";
