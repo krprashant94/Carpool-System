@@ -134,7 +134,7 @@
 		active_user = user_id;
 	}
 	function promote(e) {
-		console.log(active_user + " " + e.post.value);
+		console.log("User ID : " + active_user + " , Promotion :" + e.post.value);
 
 
 		$.ajax({
