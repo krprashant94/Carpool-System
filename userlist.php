@@ -48,7 +48,7 @@
 							<tr>
 								<td><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> <small style="color: #5abdff;"><a href="mailto:<?=$value['mail_id'];?>"><?=$value['mail_id'];?></a></small></td>
 								<td><a href="tel:<?=$value['phone'];?>"><?=$value['phone'];?></a></td>
-								<td><img src="images/userdata/user_<?=$value['id'];?>_32.png" width="32px"></td>
+								<td><img src="images/userdata/user_<?=$value['id'];?>_32.jpg" width="32px"></td>
 								<td><button class="btn btn-link" onclick="showPromote(<?=$value['id'];?>)">Promote</button></td>
 							</tr>
 						<?php endforeach ?>
