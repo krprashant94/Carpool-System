@@ -58,7 +58,7 @@
 							</td>
 							<td>
 								<center>
-									<img onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px">
+									<img data-toggle="tooltip" onclick="view('<?=$value['draft_id'];?>')" src="images/view.png" title="View this form" width="20px">
 								</center>
 							</td>
 						</tr>

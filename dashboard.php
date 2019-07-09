@@ -69,10 +69,4 @@
 
 </body>
 <?php include_once 'core/basic_java.inc.php'; ?>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('[data-toggle="tooltip"]').tooltip();   
-	});
-</script>
 </html>
-

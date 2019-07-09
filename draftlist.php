@@ -58,8 +58,9 @@
 							</td>
 							<td>
 								<center>
-									<a href="application.php?draft_id=<?=$value['draft_id'];?>"><img onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
-									<img onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px">
+									<a href="application.php?draft_id=<?=$value['draft_id'];?>">
+										<img data-toggle="tooltip" onclick="edit('<?=$value['draft_id'];?>')" src="images/edit.png" title="Edit" width="20px"></a> | 
+									<img data-toggle="tooltip" onclick="delete_application('<?=$value['draft_id'];?>')" src="images/delete.png" title="Delete this draft" width="20px">
 								</center>
 							</td>
 						</tr>

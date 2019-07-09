@@ -16,6 +16,11 @@
 		include 'core/meta.php';
 	?>
 	<link rel="stylesheet" href="css/core.css">
+	<style type="text/css">
+		#list_table td{
+			vertical-align: middle;
+		}
+	</style>
 </head>
 <body>
 	<?php

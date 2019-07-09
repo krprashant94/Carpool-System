@@ -8,7 +8,7 @@
 <div class="side_nav_top">
 	<table>
 		<tr>
-			<td rowspan="2" style="text-align: bottom; cursor: pointer;" title="change profile picture" onclick="$('#imageUploadModel').modal('show')">
+			<td rowspan="2" style="text-align: bottom; cursor: pointer;"  data-toggle="tooltip" title="Change Profile Picture" onclick="$('#imageUploadModel').modal('show')">
 				<img src="<?=$profile_pic_file;?>" class="rounded" alt="Upload" width="64px">
 			</td>
 			<td style="padding: 10px;color: white;font-weight: bold;">

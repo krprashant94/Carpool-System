@@ -54,7 +54,13 @@
 									<td><?=$value['type'];?> (<?=$value['subtype'];?>)</td>
 									<td><?=$value['status'];?></td>
 									<td><?=$value['location'];?></td>
-									<td><a href="vehiclelist.php?del=<?=$value['no'];?>">Delete</a></td>
+									<td>
+										<center>
+											<a data-toggle="tooltip" href="vehiclelist.php?del=<?=$value['no'];?>" title="Delete">
+												<img src="images/delete.png" width="20px">
+											</a>
+										</center>
+									</td>
 								</tr>
 							<?php endforeach ?>
 						</tbody>
