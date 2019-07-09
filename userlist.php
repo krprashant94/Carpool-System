@@ -50,18 +50,20 @@
 					</thead>
 					<tbody  class="applicatio_list">
 						<?php foreach ($user_list as $key => $value): ?>
-							<tr>
-								<?php
-									$user_profile_pic = "images/userdata/user_".$value['id']."_32.jpg";
-									if (!file_exists($user_profile_pic)) {
-										$user_profile_pic =  "images/user.png";
-									}
-								?>
-								<td><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> <small style="color: #5abdff;"><a href="mailto:<?=$value['mail_id'];?>"><?=$value['mail_id'];?></a></small></td>
-								<td><a href="tel:<?=$value['phone'];?>"><?=$value['phone'];?></a></td>
-								<td><img src="<?=$user_profile_pic;?>" width="32px"></td>
-								<td><button class="btn btn-link" onclick="showPromote(<?=$value['id'];?>)">Promote</button></td>
-							</tr>
+							<?php if ($value['id'] != $_SESSION['user_id']): ?>								
+								<tr>
+									<?php
+										$user_profile_pic = "images/userdata/user_".$value['id']."_32.jpg";
+										if (!file_exists($user_profile_pic)) {
+											$user_profile_pic =  "images/user.png";
+										}
+									?>
+									<td><?=$value['f_name'];?> <?=$value['m_name'];?> <?=$value['surname'];?> <small style="color: #5abdff;"><a href="mailto:<?=$value['mail_id'];?>"><?=$value['mail_id'];?></a></small></td>
+									<td><a href="tel:<?=$value['phone'];?>"><?=$value['phone'];?></a></td>
+									<td><img src="<?=$user_profile_pic;?>" width="32px"></td>
+									<td><button class="btn btn-link" onclick="showPromote(<?=$value['id'];?>)">Promote</button></td>
+								</tr>
+							<?php endif ?>
 						<?php endforeach ?>
 
 					</tbody>
