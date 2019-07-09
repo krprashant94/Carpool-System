@@ -1,8 +1,15 @@
+<?php
+	$profile_pic_file = "images/userdata/user_".$_SESSION['user_id']."_64.jpg";
+	if (!file_exists($profile_pic_file)) {
+		$profile_pic_file = "images/user.png";
+	}
+?>
+
 <div class="side_nav_top">
 	<table>
 		<tr>
 			<td rowspan="2" style="text-align: bottom; cursor: pointer;" title="change profile picture" onclick="$('#imageUploadModel').modal('show')">
-				<img src="images/userdata/user_<?=$_SESSION['user_id'];?>_64.jpg" class="rounded" alt="Upload" width="64px">
+				<img src="<?=$profile_pic_file;?>" class="rounded" alt="Upload" width="64px">
 			</td>
 			<td style="padding: 10px;color: white;font-weight: bold;">
 				<?php echo $_SESSION['name']; ?><br>
