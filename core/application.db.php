@@ -152,6 +152,21 @@
 				die();
 			}
 		}
+		public function getDriverSchedule(){
+			try{
+				$query="SELECT application.start_date, application.ending_date, vehicle.no, vehicle.type, vehicle.subtype FROM application LEFT JOIN vehicle on vehicle.no = application.vehicle_issue WHERE vehicle.driver = ?";  
+				$result = $this->conn->prepare($query);
+				$result->execute(array($_SESSION['user_id']));
+				$data=$result->fetchAll(PDO::FETCH_ASSOC);
+				return $data;
+
+			}catch(PDOException $e){
+				if ($e->getCode() == '42S02') {
+					die('<br><br><br>Installation required !!! <br><b>Open <a href="./install.php">install.php</a></b>'); 
+				}
+				die();
+			}
+		}
 	}
 
 	// $a = new Application($host, $db_name, $db_user, $db_pass);
