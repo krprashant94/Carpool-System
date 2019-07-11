@@ -12,17 +12,25 @@
 			$details2 = $u->fetch_by_two_id("phone", $_POST['user'], "password", sha1($_POST['pass']));
 
 			if(count($details1) == 1){
-				$_SESSION['user_id'] = $details1[0]['id'];
-				$_SESSION['auth_level'] = $details1[0]['auth_level'];
-				$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
-				$_SESSION['department'] = $details1[0]['department'];
-				header("Location: index.php");
+				if ($details1[0]['mail_id'] == $_POST['user']) {
+					$_SESSION['user_id'] = $details1[0]['id'];
+					$_SESSION['auth_level'] = $details1[0]['auth_level'];
+					$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
+					$_SESSION['department'] = $details1[0]['department'];
+					header("Location: index.php");
+				}else{
+					$login_message = "Invalid login information";
+				}
 			}else if(count($details2) == 1){
-				$_SESSION['user_id'] = $details2[0]['id'];
-				$_SESSION['auth_level'] = $details2[0]['auth_level'];
-				$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
-				$_SESSION['department'] = $details1[0]['department'];
-				header("Location: index.php");
+				if ($details2[0]['phone'] == $_POST['user']) {
+					$_SESSION['user_id'] = $details2[0]['id'];
+					$_SESSION['auth_level'] = $details2[0]['auth_level'];
+					$_SESSION['name'] = $details1[0]['f_name'].' '.$details1[0]['m_name'].' '.$details1[0]['surname'];
+					$_SESSION['department'] = $details1[0]['department'];
+					header("Location: index.php");
+				}else{
+					$login_message = "Invalid login information";
+				}
 			}else{
 				$login_message = "Invalid login information";
 			}
