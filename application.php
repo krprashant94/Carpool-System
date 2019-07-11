@@ -147,11 +147,6 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-8" id="helper">
-							delete
-						</div>
-					</div>
-					<div class="form-row">
 						<div class="form-group col-md-3">
 							<label for="startDate">Starting Date</label>
 							<input type="date" name="start_date" class="form-control" id="startDate" value="<?php if(isset($start_date)){ echo $start_date;} ?>">
